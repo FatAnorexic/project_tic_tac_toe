@@ -7,7 +7,7 @@
 function board(){
     const gameBoard=new Array(9)
     
-    const display=gameBoard;
+    const display=console.log(gameBoard);
 
     return {display};
 }
