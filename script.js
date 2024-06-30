@@ -6,5 +6,8 @@
 
 function board(){
     const gameBoard=new Array(9)
-    console.log(gameBoard)
+    
+    const display=gameBoard;
+
+    return {display};
 }
