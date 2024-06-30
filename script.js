@@ -5,15 +5,6 @@
 //written later in the code, as well as any win/tie checks.
 
 function board(){
-    const rows=3, columns=3;
-    const gameBoard=[];
-
-    for(let y=0;y<rows;y++){
-        gameBoard[y]=[];
-
-        for(let x=0;x<columns;x++){
-            gameBoard[y].push("");
-        }
-    }
+    const gameBoard=new Array(9)
     console.log(gameBoard)
 }
