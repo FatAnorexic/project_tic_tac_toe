@@ -5,11 +5,11 @@
 //written later in the code, as well as any win/tie checks.
 
 function gameBoard(){
-    const board=new Array(9)
-    for (let x=0;x<board.length;x++){
-        board[x]=" ";
-    }
-    const display=console.log(board);
+    const rowCol=3
+    const board=Array(rowCol).fill().map(()=>Array(rowCol).fill(""));
+    //
 
+    //Make the actual board private and display as needed
+    const display=console.log(board);
     return {display};
 }
