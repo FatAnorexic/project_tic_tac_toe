@@ -6,10 +6,10 @@
 
 function gameBoard(){
     const size=9;
-    const board=Array()
+    const board=Array();
 
     for(let x=0;x<size;x++){
-        board.push("");
+        board.push(indexValue());
     }
     
     //Method to check if a slot is available. If it is not, prevent them from overwriting the occupied spot
@@ -20,9 +20,22 @@ function gameBoard(){
     //for playing in the console. 
     const displayBoard=()=>{
         const boardVal=Array();
-        while(board.length) boardVal.push(board.splice(0,3))
+        while(board.length) boardVal.push(board.splice(0,3).map((cell)=>cell.getVal()));
         console.log(boardVal);
-    }
+    };
     return {displayBoard};
 }
 
+//This function adds a value of either an empty string or a player character when called.
+function indexValue(){
+    let value='';
+
+    const addChar=(playerChar)=>{
+        value=playerChar;
+    };
+
+    //make sure the value itself is private.
+    const getVal=()=>value;
+
+    return {addChar, getVal};
+}
