@@ -43,7 +43,8 @@ function indexValue(){
     return {addChar, getVal};
 }
 
-/*Handles the game itself and uses the previously defined functions to place Characters on the board.
+/*
+**Handles the game itself and uses the previously defined functions to place Characters on the board.
 **Checks for win conditions and tie breakers. Players are stored in objects and assigned a char upon
 **creation of the game. This will also be the function that assigns either an AI or a second player 
 **to the game. Players will also be able to input their name and will be assigned strings.
