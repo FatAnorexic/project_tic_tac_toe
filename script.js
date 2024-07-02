@@ -50,5 +50,7 @@ function indexValue(){
 */
 
 function GameController(playerOne="Player One", playerTwo="Player Two"){
-    
+
+    //Creates an array of player objects containing both their name and their Character
+    const contenders=[{name:playerOne, char: "X"}, {name:playerTwo, char: "O"}];
 }
