@@ -13,8 +13,11 @@ function gameBoard(){
     }
     
     //Method to check if a slot is available. If it is not, prevent them from overwriting the occupied spot
-    //if it is, execute the addMarker function.
-
+    //if it is, execute the addChar function.
+    const markIdx=(idx, char)=>{
+        if(board[idx].getVal()!=='') return;
+        board[idx].addChar(char);
+    };
     
     //Make the actual board private and display as needed. This board will need to be converted to a 2d Array
     //for playing in the console. 
@@ -23,7 +26,7 @@ function gameBoard(){
         while(board.length) boardVal.push(board.splice(0,3).map((cell)=>cell.getVal()));
         console.log(boardVal);
     };
-    return {displayBoard};
+    return {displayBoard, markIdx};
 }
 
 //This function adds a value of either an empty string or a player character when called.
