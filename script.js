@@ -16,9 +16,11 @@ function gameBoard(){
     //if it is, execute the addMarker function.
 
     
-    //Make the actual board private and display as needed
+    //Make the actual board private and display as needed. This board will need to be converted to a 2d Array
+    //for playing in the console. 
     const displayBoard=()=>{
-        console.log(board);
+        const boardVal=Array(3).fill(board).map(()=>Array(3).fill());
+        console.log(boardVal);
     }
     return {displayBoard};
 }
