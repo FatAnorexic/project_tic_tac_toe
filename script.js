@@ -5,11 +5,21 @@
 //written later in the code, as well as any win/tie checks.
 
 function gameBoard(){
-    const rowCol=3
-    const board=Array(rowCol).fill().map(()=>Array(rowCol).fill(""));
-    //
+    const size=9;
+    const board=Array()
 
+    for(let x=0;x<size;x++){
+        board.push("");
+    }
+    
+    //Method to check if a slot is available. If it is not, prevent them from overwriting the occupied spot
+    //if it is, execute the addMarker function.
+
+    
     //Make the actual board private and display as needed
-    const display=console.log(board);
-    return {display};
+    const displayBoard=()=>{
+        console.log(board);
+    }
+    return {displayBoard};
 }
+
