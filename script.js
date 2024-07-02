@@ -54,4 +54,18 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
 
     //Creates an array of player objects containing both their name and their Character
     const contenders=[{name:playerOne, char: "X"}, {name:playerTwo, char: "O"}];
+
+    //Creates an instance of the game board
+    const board=gameBoard();
+
+    //initialize the contenders and make the variable private by wrapping it into a function
+    let currentPlayer=contenders[0];
+
+    const getCurrent=()=>currentPlayer;
+
+    //Function to switch players each turn
+    const turn=()=>{
+        currentPlayer=currentPlayer===contenders[0]?contenders[1]:contenders[0];
+    };
+
 }
