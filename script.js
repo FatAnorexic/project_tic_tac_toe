@@ -68,4 +68,12 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
         currentPlayer=currentPlayer===contenders[0]?contenders[1]:contenders[0];
     };
 
+    //Updates the board to the most current round
+    const updateBoard=()=>{
+        board.displayBoard();
+        console.log(`${getCurrent().name}'s turn.`);
+    };
+
+    
+
 }
