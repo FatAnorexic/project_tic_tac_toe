@@ -74,6 +74,23 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
         console.log(`${getCurrent().name}'s turn.`);
     };
 
-    
+    /*
+    **place function that takes a numerical value from the player and pushes it to the markIdx function 
+    **after the character is placed, call the win/tie functions to see if either are met. If not,
+    **call the switch and update board functions
+    */
 
+    const place=(idx)=>{
+        board.markIdx(idx, getCurrent().char);
+
+        //place win/tie call here
+
+        turn();
+        updateBoard();
+    }
+
+    //initialize the board upon loading
+    updateBoard();
+
+    return {place, getCurrent}
 }
