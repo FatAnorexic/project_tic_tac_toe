@@ -19,7 +19,8 @@ function gameBoard(){
     //Make the actual board private and display as needed. This board will need to be converted to a 2d Array
     //for playing in the console. 
     const displayBoard=()=>{
-        const boardVal=Array(3).fill(board).map(()=>Array(3).fill());
+        const boardVal=Array();
+        while(board.length) boardVal.push(board.splice(0,3))
         console.log(boardVal);
     }
     return {displayBoard};
