@@ -95,7 +95,14 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
         console.log(value);
         // An IIFE that checks to see if the win state is achieved or if there is a tie
         const checkWinTie=(function(){
+            let win=false, tie=false;
+            let count=0;
 
+            winStates=[
+                       [0,1,2],[3,4,5],[6,7,8],
+                       [0,3,6],[1,4,7],[2,5,8],
+                       [0,4,8],[2,4,6]
+                      ]
         })();
         turn();
         updateBoard();
