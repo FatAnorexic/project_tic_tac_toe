@@ -11,7 +11,6 @@ function gameBoard(){
     for(let x=0;x<size;x++){
         board.push(indexValue());
     }
-    console.log(board[0])
     
     //Method to check if a slot is available. If it is not, prevent them from overwriting the occupied spot
     //if it is, execute the addChar function.
