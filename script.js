@@ -12,6 +12,7 @@ function gameBoard(){
         board.push(indexValue());
     }
     
+    const getBoard=()=>board;
     //Method to check if a slot is available. If it is not, prevent them from overwriting the occupied spot
     //if it is, execute the addChar function.
     const markIdx=(idx, char)=>{
@@ -30,7 +31,7 @@ function gameBoard(){
         
         console.log(boardVal);
     };
-    return {displayBoard, markIdx};
+    return {getBoard, displayBoard, markIdx};
 }
 
 //This function adds a value of either an empty string or a player character when called.
@@ -88,7 +89,8 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
         board.markIdx(idx, getCurrent().char);
 
         //place win/tie call here
-
+        let value=board.getBoard().map(({addChar, getVal}) => getVal())
+        console.log(value);
         turn();
         updateBoard();
     }
