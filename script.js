@@ -14,7 +14,7 @@ function gameBoard(){
     
     //Factory function to get the status of a board, passes to checkWinTie later
     const getBoard=()=>board;
-    
+
     //Method to check if a slot is available. If it is not, prevent them from overwriting the occupied spot
     //if it is, execute the addChar function.
     const markIdx=(idx, char)=>{
@@ -93,6 +93,10 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
         //place win/tie call here
         let value=board.getBoard().map(({addChar, getVal}) => getVal())
         console.log(value);
+        // An IIFE that checks to see if the win state is achieved or if there is a tie
+        const checkWinTie=(function(){
+
+        })();
         turn();
         updateBoard();
     }
