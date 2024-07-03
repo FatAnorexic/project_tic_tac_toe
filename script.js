@@ -12,7 +12,9 @@ function gameBoard(){
         board.push(indexValue());
     }
     
+    //Factory function to get the status of a board, passes to checkWinTie later
     const getBoard=()=>board;
+    
     //Method to check if a slot is available. If it is not, prevent them from overwriting the occupied spot
     //if it is, execute the addChar function.
     const markIdx=(idx, char)=>{
