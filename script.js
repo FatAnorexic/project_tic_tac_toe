@@ -6,15 +6,17 @@
 
 function gameBoard(){
     const size=9;
-    const board=Array();
+    const board=[];
 
     for(let x=0;x<size;x++){
         board.push(indexValue());
     }
+    console.log(board[0])
     
     //Method to check if a slot is available. If it is not, prevent them from overwriting the occupied spot
     //if it is, execute the addChar function.
     const markIdx=(idx, char)=>{
+        
         if(board[idx].getVal()!=='') return;
         board[idx].addChar(char);
     };
@@ -22,8 +24,11 @@ function gameBoard(){
     //Make the actual board private and display as needed. This board will need to be converted to a 2d Array
     //for playing in the console. 
     const displayBoard=()=>{
-        const boardVal=Array();
-        while(board.length) boardVal.push(board.splice(0,3).map((cell)=>cell.getVal()));
+        let copy=board.map((cell)=>cell.getVal()); //another way is to say copy=[].concat(board) then map the value when running through the while loop. 
+        
+        const boardVal=[];
+         while(copy.length) boardVal.push(copy.splice(0,3));
+        
         console.log(boardVal);
     };
     return {displayBoard, markIdx};
@@ -92,5 +97,7 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
     //initialize the board upon loading
     updateBoard();
 
-    return {place, getCurrent}
+    return {place, getCurrent};
 }
+
+const game=GameController();
