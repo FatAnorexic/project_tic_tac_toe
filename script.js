@@ -103,7 +103,8 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
             
             //Map the board.getVal() function onto a 1D array for use in the for loops below
             let status=board.getBoard().map(({addChar, getVal})=>getVal());
-
+            
+            //Checks if win has been met
             for(let i=0;i<winStates.length;i++){
                 [x,y,z]=winStates[i];
                 if(status[x]===getCurrent().char && status[y]===getCurrent().char && status[z]===getCurrent().char){
@@ -111,9 +112,19 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
                 }
             }
 
+            for(let x=0;x<status.length;x++){
+                if(status[x]==='') count++;
+            }
+
+            if(count<1 && !win){
+                tie=true;
+            }
 
             const getWin=()=>win;
-            return {getWin};
+            const getTie=()=>tie;
+
+
+            return {getWin, getTie};
         })();
 
         turn();
