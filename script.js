@@ -127,8 +127,29 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
             return {getWin, getTie};
         })();
 
-        turn();
-        updateBoard();
+        //Returns the win message and resets the board
+
+        const win=()=>{
+            let message;
+            
+            if(check.getWin()){
+                message=`${getCurrent().name} has won the round!`;
+            }else if(check.getTie()){
+                message=`Nobody won this round, as there are no moves left on the board`;
+            }
+
+
+            const getMessage=()=>{console.log(message);};
+
+            return {getMessage};
+        }
+
+        if(!check.getWin() && !check.getTie()){
+            turn();
+            updateBoard();
+        }else{
+            win().getMessage();
+        }
     }
 
     //initialize the board upon loading
