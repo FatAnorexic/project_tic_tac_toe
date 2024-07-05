@@ -60,6 +60,31 @@ function indexValue(){
 
 const AI=(()=>{
 
+
+    //finds the best move to make on the board
+    const findBestMove=(moves, player)=>{
+        let bestMove;
+        if(player.char==='X'){
+            let bestScore=1000;
+            for(let x=0;x<moves.length;x++){
+                if(moves[x].score<bestScore){
+                    bestScore=moves[x].score;
+                    bestMove=x;
+                }
+            }
+        }else{
+            let bestScore=-1000;
+            for(let x=0;x<moves.length;x++){
+                if(moves[x].score>bestScore){
+                    bestScore=moves[x].score;
+                    bestMove=x;
+                }
+            }
+        }
+        return moves[bestMove];
+    };
+
+    return{findBestMove};
 })();
 
 
@@ -77,6 +102,7 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
     //Creates an array of player objects containing both their name and their Character
     const contenders=[{name:playerOne, char: "X", score: 0}, {name:playerTwo, char: "O", score: 0}];
 
+
     //Creates an instance of the game board
     const board=gameBoard();
 
@@ -84,6 +110,7 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
     let currentPlayer=contenders[0];
 
     const getCurrent=()=>currentPlayer;
+
 
     //Add factory function to get both scores
     const getScore=()=>{console.log(contenders[0].score, contenders[1].score);};
@@ -106,6 +133,8 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
     */
 
     const place=(idx)=>{
+        
+        AI.findBestMove(0,getCurrent());
         board.markIdx(idx, getCurrent().char);
 
         // An IIFE that checks to see if the win state is achieved or if there is a tie
