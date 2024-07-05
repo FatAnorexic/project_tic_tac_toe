@@ -60,7 +60,7 @@ function indexValue(){
 function GameController(playerOne="Player One", playerTwo="Player Two"){
 
     //Creates an array of player objects containing both their name and their Character
-    const contenders=[{name:playerOne, char: "X"}, {name:playerTwo, char: "O"}];
+    const contenders=[{name:playerOne, char: "X", score: 0}, {name:playerTwo, char: "O", score: 0}];
 
     //Creates an instance of the game board
     const board=gameBoard();
@@ -69,6 +69,9 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
     let currentPlayer=contenders[0];
 
     const getCurrent=()=>currentPlayer;
+
+    //Add factory function to get both scores
+    const getScore=()=>{console.log(contenders[0].score, contenders[1].score);};
 
     //Function to switch players each turn
     const turn=()=>{
@@ -134,6 +137,7 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
             
             if(check.getWin()){
                 message=`${getCurrent().name} has won the round!`;
+                getCurrent().score++;
             }else if(check.getTie()){
                 message=`Nobody won this round, as there are no moves left on the board`;
             }
@@ -149,6 +153,7 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
             updateBoard();
         }else{
             win().getMessage();
+            getScore();
         }
     }
 
