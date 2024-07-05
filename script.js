@@ -33,7 +33,17 @@ function gameBoard(){
         
         console.log(boardVal);
     };
-    return {getBoard, displayBoard, markIdx};
+
+    //Runs through the array and checks if the cell is empty or filled
+    const getEmptyCells=()=>{
+        let cells=[];
+        for(let x=0;x<getBoard().length;x++){
+            const cell=board[x].getVal();
+            if(cell=='') cells.push(x);
+        }
+        return cells;
+    }
+    return {getBoard, displayBoard, markIdx, getEmptyCells};
 }
 
 //This function adds a value of either an empty string or a player character when called.
@@ -84,7 +94,12 @@ const AI=(()=>{
         return moves[bestMove];
     };
 
-    return{findBestMove};
+    //Return the index and score of the next best move
+    const minimax=(board, player)=>{
+        let empty=board.getEmptyCells();
+    }
+
+    return{findBestMove, minimax};
 })();
 
 
@@ -126,6 +141,43 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
         console.log(`${getCurrent().name}'s turn.`);
     };
 
+    // Factory function that checks to see if the win state is achieved or if there is a tie
+    const check=()=>{
+        let win=false, tie=false;
+        let count=0;
+
+        winStates=[
+                   [0,1,2],[3,4,5],[6,7,8],
+                   [0,3,6],[1,4,7],[2,5,8],
+                   [0,4,8],[2,4,6]
+                  ];
+        
+        //Map the board.getVal() function onto a 1D array for use in the for loops below
+        let status=board.getBoard().map(({addChar, getVal})=>getVal());
+
+        //Checks if win has been met
+        for(let i=0;i<winStates.length;i++){
+            [x,y,z]=winStates[i];
+            if(status[x]===getCurrent().char && status[y]===getCurrent().char && status[z]===getCurrent().char){
+                win=true;
+            }
+        }
+
+        for(let x=0;x<status.length;x++){
+            if(status[x]==='') count++;
+        }
+
+        if(count<1 && !win){
+            tie=true;
+        }
+
+        const getWin=()=>win;
+        const getTie=()=>tie;
+
+
+        return {getWin, getTie};
+    };
+
     /*
     **place function that takes a numerical value from the player and pushes it to the markIdx function 
     **after the character is placed, call the win/tie functions to see if either are met. If not,
@@ -134,55 +186,17 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
 
     const place=(idx)=>{
         
-        AI.findBestMove(0,getCurrent());
         board.markIdx(idx, getCurrent().char);
-
-        // An IIFE that checks to see if the win state is achieved or if there is a tie
-        const check=(function(){
-            let win=false, tie=false;
-            let count=0;
-
-            winStates=[
-                       [0,1,2],[3,4,5],[6,7,8],
-                       [0,3,6],[1,4,7],[2,5,8],
-                       [0,4,8],[2,4,6]
-                      ];
-            
-            //Map the board.getVal() function onto a 1D array for use in the for loops below
-            let status=board.getBoard().map(({addChar, getVal})=>getVal());
-            
-            //Checks if win has been met
-            for(let i=0;i<winStates.length;i++){
-                [x,y,z]=winStates[i];
-                if(status[x]===getCurrent().char && status[y]===getCurrent().char && status[z]===getCurrent().char){
-                    win=true;
-                }
-            }
-
-            for(let x=0;x<status.length;x++){
-                if(status[x]==='') count++;
-            }
-
-            if(count<1 && !win){
-                tie=true;
-            }
-
-            const getWin=()=>win;
-            const getTie=()=>tie;
-
-
-            return {getWin, getTie};
-        })();
-
+        
         //Returns the win message and resets the board
 
         const win=()=>{
             let message;
             
-            if(check.getWin()){
+            if(check().getWin()){
                 message=`${getCurrent().name} has won the round!`;
                 getCurrent().score++;
-            }else if(check.getTie()){
+            }else if(check().getTie()){
                 message=`Nobody won this round, as there are no moves left on the board`;
             }
 
@@ -192,7 +206,7 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
             return {getMessage};
         }
 
-        if(!check.getWin() && !check.getTie()){
+        if(!check().getWin() && !check().getTie()){
             turn();
             updateBoard();
         }else{
