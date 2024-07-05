@@ -51,6 +51,21 @@ function indexValue(){
 }
 
 /*
+**AI IIFE to run the AI. It uses the minimax algorithm recursively to find the best possible moves on the
+**board. This current rendition of the code comes from Peter Abordan GH: @Pety99. This is a rough outline
+**for the functioning AI and will no doubt need to be changed and altered to better suit the code flow
+**of my program. Further reading on this Algorithm: 
+**https://www.geeksforgeeks.org/finding-optimal-move-in-tic-tac-toe-using-minimax-algorithm-in-game-theory/
+*/
+
+const AI=(()=>{
+
+})();
+
+
+
+
+/*
 **Handles the game itself and uses the previously defined functions to place Characters on the board.
 **Checks for win conditions and tie breakers. Players are stored in objects and assigned a char upon
 **creation of the game. This will also be the function that assigns either an AI or a second player 
