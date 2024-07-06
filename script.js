@@ -19,7 +19,6 @@ function gameBoard(){
     //Method to check if a slot is available. If it is not, prevent them from overwriting the occupied spot
     //if it is, execute the addChar function.
     const markIdx=(idx, char)=>{
-        
         if(board[idx].getVal()!=='') return;
         board[idx].addChar(char);
     };
@@ -35,22 +34,7 @@ function gameBoard(){
         console.log(boardVal);
     };
 
-    //sets the logic for the AI
-    const setCellsForAILogic=(number, player)=>{
-        
-        board[number].addChar(player)
-    }
-
-    //Runs through the array and checks if the cell is empty or filled
-    const getEmptyCells=()=>{
-        let cells=[];
-        for(let x=0;x<getBoard().length;x++){
-            const cell=board[x].getVal();
-            if(cell=='') cells.push(x);
-        }
-        return cells;
-    }
-    return {getBoard, displayBoard, markIdx, getEmptyCells, setCellsForAILogic, getInd};
+    return {getBoard, displayBoard, markIdx, getInd};
 }
 
 //This function adds a value of either an empty string or a player character when called.
@@ -75,10 +59,10 @@ function indexValue(){
 **https://www.geeksforgeeks.org/finding-optimal-move-in-tic-tac-toe-using-minimax-algorithm-in-game-theory/
 */
 
-const AI=(()=>{
+function AI(){
 
     const isMovesLeft=(board)=>{
-        let state=board.getBoard().map(({addChar, getVal})=>getVal());
+        let state=board.map(({addChar, getVal})=>getVal());
         for(let x=0;x<state.length;x++){
             if(state[x]=='') return true;
         }
@@ -95,7 +79,7 @@ const AI=(()=>{
                     [0,4,8],[2,4,6]
                   ];
 
-        let status=board.getBoard().map(({addChar, getVal})=>getVal());
+        let status=board.map(({addChar, getVal})=>getVal());
         //Checks if win has been met
         for(let i=0;i<winStates.length;i++){
             [x,y,z]=winStates[i];
@@ -147,34 +131,30 @@ const AI=(()=>{
     
     
     //finds the best move to make on the board
-    const findBestMove=(moves, player)=>{
+    const findBestMove=(board, player)=>{
+        let bestVal=-1000;
         let bestMove;
-        //This player is the maximizer. Their goal is to maximize the "score"
-        if(player===game.getPlayers()[1]){
-            let bestScore=-1000;
-            for(let x=0;x<moves.length;x++){
-                if(moves[x].score>bestScore){
-                    bestScore=moves[x].score;
+        for(let x=0;x<board.length;x++){
+            if(board[x].getVal()==''){
+                board[x].addChar(player);
+
+                let value=minimax(board, 0, game.getPlayers()[0].char);
+
+                board[x].addChar('');
+
+                if(value>bestVal){
                     bestMove=x;
-                }
-            }
-        }else{
-            let bestScore=1000;
-            //This is for the minimizer->the goal is to get as far below 0 as possible
-            for(let x=0;x<moves.length;x++){
-                if(moves[x].score<bestScore){
-                    bestScore=moves[x].score;
-                    bestMove=x;
+                    bestVal=value;
                 }
             }
         }
-        return moves[bestMove];
-    };
+        return bestMove;
+    }
 
 
 
-    return{minimax};
-})();
+    return{findBestMove};
+}
 
 
 
@@ -199,7 +179,7 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
     let currentPlayer=contenders[0];
 
     const getPlayers=()=>contenders;
-    console.log(getPlayers()[0])
+    
     
     const getCurrent=()=>currentPlayer;
 
@@ -268,9 +248,9 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
         }
 
         if(getCurrent().name==playerTwo){
-            let choice = AI.minimax(board, 0, getCurrent().char)
+            let choice = AI().findBestMove(board.getBoard(), getCurrent().char)
             console.log(choice)
-            board.markIdx(choice.index, getCurrent().char);
+            board.markIdx(choice, getCurrent().char);
         }
         
         //Returns the win message and resets the board
@@ -303,7 +283,7 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
     //initialize the board upon loading
     updateBoard();
 
-    return {place, getCurrent, check, getPlayers};
+    return {place, getCurrent, check, getPlayers, board};
 }
 
 const game=GameController();
