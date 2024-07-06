@@ -14,6 +14,7 @@ function gameBoard(){
     
     //Factory function to get the status of a board, passes to checkWinTie later
     const getBoard=()=>board;
+    const getInd=(num)=>board[num];
 
     //Method to check if a slot is available. If it is not, prevent them from overwriting the occupied spot
     //if it is, execute the addChar function.
@@ -49,7 +50,7 @@ function gameBoard(){
         }
         return cells;
     }
-    return {getBoard, displayBoard, markIdx, getEmptyCells, setCellsForAILogic};
+    return {getBoard, displayBoard, markIdx, getEmptyCells, setCellsForAILogic, getInd};
 }
 
 //This function adds a value of either an empty string or a player character when called.
@@ -82,18 +83,18 @@ const AI=(()=>{
         let bestMove;
         //This player is the maximizer. Their goal is to maximize the "score"
         if(player==='X'){
-            let bestScore=1000;
+            let bestScore=-10000;
             for(let x=0;x<moves.length;x++){
-                if(moves[x].score<bestScore){
+                if(moves[x].score>bestScore){
                     bestScore=moves[x].score;
                     bestMove=x;
                 }
             }
         }else{
-            let bestScore=-1000;
+            let bestScore=10000;
             //This is for the minimizer->the goal is to get as far below 0 as possible
             for(let x=0;x<moves.length;x++){
-                if(moves[x].score>bestScore){
+                if(moves[x].score<bestScore){
                     bestScore=moves[x].score;
                     bestMove=x;
                 }
@@ -236,8 +237,16 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
 
     const place=(idx)=>{
         
-        board.markIdx(idx, getCurrent().char);
-        console.log(AI(board, getCurrent().char))
+        if (getCurrent().name==playerOne){
+            board.markIdx(idx, getCurrent().char);
+        }
+
+        if(getCurrent().name==playerTwo){
+            let choice = AI.minimax(board, getCurrent().char);
+            if(board.getInd(choice.index).getVal()!='') return "error";
+            board.markIdx(choice.index, getCurrent().char);
+        }
+        
         //Returns the win message and resets the board
 
         const win=()=>{
