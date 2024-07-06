@@ -105,9 +105,9 @@ const AI=(()=>{
         }
         
         if(win){
-            if(player==game.getPlayers()[0].char){
+            if(player==game.getPlayers()[1].char){
                 return +10;
-            }else if(player==game.getPlayers()[1].char){
+            }else if(player==game.getPlayers()[0].char){
                 return -10;
             }
         }
@@ -120,6 +120,29 @@ const AI=(()=>{
         if(score==10) return score;
         if(score==-10) return score;
         if(isMovesLeft(board)==false) return 0;
+
+        if(player==game.getPlayers()[1].char){
+            let best=-1000;
+            for(let x=0;x<board.length;x++){
+                if(board[x].getVal()==''){
+                    board[x].addChar(player);
+
+                    best=Math.max(best, minimax(board, depth+1, game.getPlayers()[0].char));
+                    board[x].addChar('');
+                }
+            }
+            return best;
+        }else{
+            let best=1000;
+            for(let x=0;x<board.length;x++){
+                if(board[x].getVal()==''){
+                    board[x].addChar(game.getPlayers()[0].char);
+                    best=Math.min(best, minimax(board, depth+1, game.getPlayers()[1].char));
+                    board[x].addChar('');
+                }
+            }
+            return best
+        }
     };
     
     
@@ -245,7 +268,7 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
         }
 
         if(getCurrent().name==playerTwo){
-            let choice = AI.minimax(board, getCurrent().char)
+            let choice = AI.minimax(board, 0, getCurrent().char)
             console.log(choice)
             board.markIdx(choice.index, getCurrent().char);
         }
