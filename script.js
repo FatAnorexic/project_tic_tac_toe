@@ -34,6 +34,12 @@ function gameBoard(){
         console.log(boardVal);
     };
 
+    //sets the logic for the AI
+    const setCellsForAILogic=(number, player)=>{
+        
+        board[number].addChar(player)
+    }
+
     //Runs through the array and checks if the cell is empty or filled
     const getEmptyCells=()=>{
         let cells=[];
@@ -43,7 +49,7 @@ function gameBoard(){
         }
         return cells;
     }
-    return {getBoard, displayBoard, markIdx, getEmptyCells};
+    return {getBoard, displayBoard, markIdx, getEmptyCells, setCellsForAILogic};
 }
 
 //This function adds a value of either an empty string or a player character when called.
@@ -74,7 +80,8 @@ const AI=(()=>{
     //finds the best move to make on the board
     const findBestMove=(moves, player)=>{
         let bestMove;
-        if(player.char==='X'){
+        //This player is the maximizer. Their goal is to maximize the "score"
+        if(player==='X'){
             let bestScore=1000;
             for(let x=0;x<moves.length;x++){
                 if(moves[x].score<bestScore){
@@ -84,6 +91,7 @@ const AI=(()=>{
             }
         }else{
             let bestScore=-1000;
+            //This is for the minimizer->the goal is to get as far below 0 as possible
             for(let x=0;x<moves.length;x++){
                 if(moves[x].score>bestScore){
                     bestScore=moves[x].score;
@@ -94,12 +102,54 @@ const AI=(()=>{
         return moves[bestMove];
     };
 
-    //Return the index and score of the next best move
+    //Return the index and score of the next best move. it takes the player char and game board as arguments
     const minimax=(board, player)=>{
+        //This will create a list of empty cells for minmax to simulate possible win/loss combinations
         let empty=board.getEmptyCells();
+        if(game.check().getTie()){
+            return{
+                score: 0
+            };
+        }else if(game.check().getWin()){
+            if(player==='X'){
+                return{
+                    score: 10
+                };
+            }else if(player==='O'){
+                return{
+                    score: -10
+                };
+            }
+        }
+
+        let moves=[];
+
+        for(let x=0;x<empty.length;x++){
+            //empty object, which will store the best move index along with its score at the end of the first level of the loop
+            let move={};
+            move.index=empty[x];
+            
+            board.setCellsForAILogic(empty[x],player);
+
+            //This emulates the various outcomes of the loop by recursively looping through the function over various levels
+            //until the a win or tie state is achieved. 
+            if(player=="O"){
+                let result=minimax(board,"X");
+                move.score=result.score;
+            }else{
+                let result=minimax(board,"O");
+                move.score=result.score;
+            }
+
+            //At the end of the loop reset all empty cells
+            board.setCellsForAILogic(empty[x], '');
+            
+            moves.push(move);
+        }
+        return findBestMove(moves,player)
     }
 
-    return{findBestMove, minimax};
+    return{minimax};
 })();
 
 
@@ -187,7 +237,7 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
     const place=(idx)=>{
         
         board.markIdx(idx, getCurrent().char);
-        
+        console.log(AI(board, getCurrent().char))
         //Returns the win message and resets the board
 
         const win=()=>{
@@ -218,7 +268,7 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
     //initialize the board upon loading
     updateBoard();
 
-    return {place, getCurrent};
+    return {place, getCurrent, check};
 }
 
 const game=GameController();
