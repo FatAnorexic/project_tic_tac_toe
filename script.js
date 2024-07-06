@@ -77,51 +77,41 @@ function indexValue(){
 
 const AI=(()=>{
 
+    //evaluate the board for win conditions
+    const evaluate=(board, player)=>{
+        let win=false;
 
-    //finds the best move to make on the board
-    const findBestMove=(moves, player)=>{
-        let bestMove;
-        //This player is the maximizer. Their goal is to maximize the "score"
-        if(player==='X'){
-            let bestScore=-10000;
-            for(let x=0;x<moves.length;x++){
-                if(moves[x].score>bestScore){
-                    bestScore=moves[x].score;
-                    bestMove=x;
-                }
-            }
-        }else{
-            let bestScore=10000;
-            //This is for the minimizer->the goal is to get as far below 0 as possible
-            for(let x=0;x<moves.length;x++){
-                if(moves[x].score<bestScore){
-                    bestScore=moves[x].score;
-                    bestMove=x;
-                }
+        winStates=[
+                    [0,1,2],[3,4,5],[6,7,8],
+                    [0,3,6],[1,4,7],[2,5,8],
+                    [0,4,8],[2,4,6]
+                  ];
+
+        let status=board.getBoard().map(({addChar, getVal})=>getVal());
+        //Checks if win has been met
+        for(let i=0;i<winStates.length;i++){
+            [x,y,z]=winStates[i];
+            if(status[x]===player && status[y]===player && status[z]===player){
+                win=true;
             }
         }
-        return moves[bestMove];
+        
+        if(win){
+            if(player==game.getPlayers()[0].char){
+                return +10;
+            }else if(player==game.getPlayers()[1].char){
+                return -10;
+            }
+        }
+        return 0;
     };
 
     //Return the index and score of the next best move. it takes the player char and game board as arguments
     const minimax=(board, player)=>{
         //This will create a list of empty cells for minmax to simulate possible win/loss combinations
         let empty=board.getEmptyCells();
-        if(game.check().getTie()){
-            return{
-                score: 0
-            };
-        }else if(game.check().getWin()){
-            if(player==='X'){
-                return{
-                    score: 10
-                };
-            }else if(player==='O'){
-                return{
-                    score: -10
-                };
-            }
-        }
+        
+        
 
         let moves=[];
 
@@ -134,11 +124,11 @@ const AI=(()=>{
 
             //This emulates the various outcomes of the loop by recursively looping through the function over various levels
             //until the a win or tie state is achieved. 
-            if(player=="O"){
-                let result=minimax(board,"X");
+            if(player==game.getPlayers()[1]){
+                let result=minimax(board,game.getPlayers()[0].char);
                 move.score=result.score;
             }else{
-                let result=minimax(board,"O");
+                let result=minimax(board,game.getPlayers()[1].char);
                 move.score=result.score;
             }
 
@@ -147,8 +137,36 @@ const AI=(()=>{
             
             moves.push(move);
         }
-        return findBestMove(moves,player)
-    }
+        return findBestMove(moves,player);
+    };
+    
+    
+    //finds the best move to make on the board
+    const findBestMove=(moves, player)=>{
+        let bestMove;
+        //This player is the maximizer. Their goal is to maximize the "score"
+        if(player===game.getPlayers()[1]){
+            let bestScore=-1000;
+            for(let x=0;x<moves.length;x++){
+                if(moves[x].score>bestScore){
+                    bestScore=moves[x].score;
+                    bestMove=x;
+                }
+            }
+        }else{
+            let bestScore=1000;
+            //This is for the minimizer->the goal is to get as far below 0 as possible
+            for(let x=0;x<moves.length;x++){
+                if(moves[x].score<bestScore){
+                    bestScore=moves[x].score;
+                    bestMove=x;
+                }
+            }
+        }
+        return moves[bestMove];
+    };
+
+
 
     return{minimax};
 })();
@@ -167,7 +185,7 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
 
     //Creates an array of player objects containing both their name and their Character
     const contenders=[{name:playerOne, char: "X", score: 0}, {name:playerTwo, char: "O", score: 0}];
-
+    
 
     //Creates an instance of the game board
     const board=gameBoard();
@@ -175,6 +193,9 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
     //initialize the contenders and make the variable private by wrapping it into a function
     let currentPlayer=contenders[0];
 
+    const getPlayers=()=>contenders;
+    console.log(getPlayers()[0])
+    
     const getCurrent=()=>currentPlayer;
 
 
@@ -242,8 +263,8 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
         }
 
         if(getCurrent().name==playerTwo){
-            let choice = AI.minimax(board, getCurrent().char);
-            if(board.getInd(choice.index).getVal()!='') return "error";
+            let choice = AI.minimax(board, getCurrent().char)
+            console.log(choice)
             board.markIdx(choice.index, getCurrent().char);
         }
         
@@ -277,7 +298,7 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
     //initialize the board upon loading
     updateBoard();
 
-    return {place, getCurrent, check};
+    return {place, getCurrent, check, getPlayers};
 }
 
 const game=GameController();
