@@ -52,10 +52,12 @@ function indexValue(){
 }
 
 /*
-**AI IIFE to run the AI. It uses the minimax algorithm recursively to find the best possible moves on the
-**board. This current rendition of the code comes from Peter Abordan GH: @Pety99. This is a rough outline
-**for the functioning AI and will no doubt need to be changed and altered to better suit the code flow
-**of my program. Further reading on this Algorithm: 
+**An AI function that uses a modified version of minimax. Credit must be given to Peter Abordan GH:@Pety99
+**for helping me to understand the logic of how this algorithm would work early in its implementation.
+**This version is more based off of the GeeksforGeeks rendition. With the exception of
+**dificulty modes(still needs implementation), this algorithm can be considered fully complete. 
+**Future modifacations may include calling the evaluate elsewhere in the game controller to reducuce redundant
+**code. Further reading on this Algorithm: 
 **https://www.geeksforgeeks.org/finding-optimal-move-in-tic-tac-toe-using-minimax-algorithm-in-game-theory/
 */
 
