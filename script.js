@@ -34,7 +34,14 @@ function gameBoard(){
         console.log(boardVal);
     };
 
-    return {getBoard, displayBoard, markIdx, getInd};
+    //Function to clear the board and return everything back to a zeroth state
+    const clearBoard=()=>{
+        for(let x=0;x<board.length;x++){
+            board[x].addChar('');
+        }
+    }
+
+    return {getBoard, displayBoard, markIdx, getInd, clearBoard};
 }
 
 //This function adds a value of either an empty string or a player character when called.
@@ -237,6 +244,22 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
         return {getWin, getTie};
     };
 
+    const win=()=>{
+        let message;
+        
+        if(check().getWin()){
+            message=`${getCurrent().name} has won the round!`;
+            getCurrent().score++;
+        }else if(check().getTie()){
+            message=`Nobody won this round, as there are no moves left on the board`;
+        }
+
+
+        const getMessage=()=>{console.log(message);};
+
+        return {getMessage};
+    }
+
     /*
     **place function that takes a numerical value from the player and pushes it to the markIdx function 
     **after the character is placed, call the win/tie functions to see if either are met. If not,
@@ -248,39 +271,25 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
         if (getCurrent().name==playerOne){
             board.markIdx(idx, getCurrent().char);
         }
-
+        
         if(getCurrent().name==playerTwo){
             let choice = AI().findBestMove(board.getBoard(), getCurrent().char)
             console.log(choice)
             board.markIdx(choice, getCurrent().char);
         }
         
-        //Returns the win message and resets the board
-
-        const win=()=>{
-            let message;
-            
-            if(check().getWin()){
-                message=`${getCurrent().name} has won the round!`;
-                getCurrent().score++;
-            }else if(check().getTie()){
-                message=`Nobody won this round, as there are no moves left on the board`;
-            }
-
-
-            const getMessage=()=>{console.log(message);};
-
-            return {getMessage};
-        }
-
         if(!check().getWin() && !check().getTie()){
             turn();
             updateBoard();
         }else{
             win().getMessage();
             getScore();
+            board.clearBoard();
+            turn();
+            updateBoard();
         }
     }
+
 
     //initialize the board upon loading
     updateBoard();
@@ -288,11 +297,5 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
     return {place, getCurrent, check, getPlayers, board};
 }
 
-const round=(()=>{
-    const game=GameController();
-    if (game.getCurrent()==game.getPlayers()[0]){
-        let move=prompt("Enter a number between 0 and 8");
-        game.place(move);
-    }
-})();
+const game=GameController();
 
