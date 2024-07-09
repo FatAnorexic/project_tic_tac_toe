@@ -289,7 +289,10 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
 }
 
 const round=(()=>{
-
+    const game=GameController();
+    if (game.getCurrent()==game.getPlayers()[0]){
+        let move=prompt("Enter a number between 0 and 8");
+        game.place(move);
+    }
 })();
 
-const game=GameController();
