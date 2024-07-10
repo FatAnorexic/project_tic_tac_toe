@@ -294,10 +294,34 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
     //initialize the board upon loading
     updateBoard();
 
-    return {place, getCurrent, check, getPlayers, board};
+    return {place, getCurrent, check, getPlayers, board, getBoard: board.getBoard};
 }
 
 const displayController=(()=>{
     const game=GameController();
+
+    const boardDiv=document.querySelector('.board');
+
+    //This renders the board when the game is loaded into memory
+    const render=(()=>{
+        const board=game.getBoard();
+
+        board.forEach((cell, index)=>{
+            const cellButton=document.createElement("button");
+            cellButton.classList.add('tempCells');
+
+            cellButton.dataset=index;
+            cellButton.textContent=cell.getVal();
+            boardDiv.appendChild(cellButton);
+        })
+    })();
+
+    function clickHandler(e){
+        const index=e.target.dataset;
+
+        game.place(index);
+        render();
+    }
+    boardDiv.addEventListener('click', clickHandler);
 })();
 
