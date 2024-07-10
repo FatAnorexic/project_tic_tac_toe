@@ -305,7 +305,6 @@ const displayController=(()=>{
     //This renders the board when the game is loaded into memory
     const render=(()=>{
         const board=game.getBoard();
-        console.log(board)
         board.forEach((cell, index)=>{
             const cellButton=document.createElement("button");
             cellButton.classList.add('tempCells');
