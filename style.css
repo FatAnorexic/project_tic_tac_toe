@@ -1,0 +1,15 @@
+
+/* make the board a grid display */
+.board{
+    display: grid;
+    width: 300px;
+    height: 300px;
+    justify-content: center;
+    grid-template-columns: repeat(3,100px);
+    grid-template-rows: repeat(3,100px);
+    background-color: blueviolet;
+}
+
+.tempCells{
+    border: 2px solid black;
+}
