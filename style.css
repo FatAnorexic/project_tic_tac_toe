@@ -7,9 +7,10 @@
     justify-content: center;
     grid-template-columns: repeat(3,100px);
     grid-template-rows: repeat(3,100px);
-    background-color: blueviolet;
+    
 }
 
 .tempCells{
     border: 2px solid black;
+    background-color: blueviolet;
 }
