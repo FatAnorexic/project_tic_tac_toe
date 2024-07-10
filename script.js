@@ -69,7 +69,7 @@ function indexValue(){
 */
 
 function AI(){
-
+    let game=GameController();
     const isMovesLeft=(board)=>{
         let state=board.map(({addChar, getVal})=>getVal());
         for(let x=0;x<state.length;x++){
