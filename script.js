@@ -298,6 +298,6 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
 }
 
 const displayController=(()=>{
-
+    const game=GameController();
 })();
 
