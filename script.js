@@ -305,22 +305,22 @@ const displayController=(()=>{
     //This renders the board when the game is loaded into memory
     const render=(()=>{
         const board=game.getBoard();
-
+        console.log(board)
         board.forEach((cell, index)=>{
             const cellButton=document.createElement("button");
             cellButton.classList.add('tempCells');
 
-            cellButton.dataset=index;
+            cellButton.dataset.column=index;
             cellButton.textContent=cell.getVal();
             boardDiv.appendChild(cellButton);
         })
     })();
 
     function clickHandler(e){
-        const index=e.target.dataset;
+        const index=e.target.dataset.column;
 
         game.place(index);
-        render();
+        render;
     }
     boardDiv.addEventListener('click', clickHandler);
 })();
