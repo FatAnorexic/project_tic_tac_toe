@@ -266,30 +266,6 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
     **call the switch and update board functions
     */
 
-    const place=(idx)=>{
-        
-        if (getCurrent().name==playerOne){
-            board.markIdx(idx, getCurrent().char);
-        }
-        
-        if(getCurrent().name==playerTwo){
-            let choice = AI().findBestMove(board.getBoard(), getCurrent().char)
-            console.log(choice)
-            board.markIdx(choice, getCurrent().char);
-        }
-        
-        if(!check().getWin() && !check().getTie()){
-            turn();
-            updateBoard();
-        }else{
-            win().getMessage();
-            getScore();
-            board.clearBoard();
-            turn();
-            updateBoard();
-        }
-    }
-
     const player=(idx)=>{
         board.markIdx(idx, getCurrent().char);
 
@@ -306,15 +282,26 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
     }
 
     const aiPlayer=()=>{
-        let choice=AI.findBestMove(board.getBoard(), getCurrent().char);
+        let choice=AI().findBestMove(board.getBoard(), getCurrent().char);
         board.markIdx(choice, getCurrent().char);
+
+        if(!check().getWin() && !check().getTie()){
+            turn();
+            updateBoard();
+        }else{
+            win().getMessage();
+            getScore();
+            board.clearBoard();
+            turn();
+            updateBoard();
+        }
     }
 
 
     //initialize the board upon loading
     updateBoard();
 
-    return {place, getCurrent, check, getPlayers, board, getBoard: board.getBoard};
+    return {player, aiPlayer, getCurrent, check, getPlayers, board, getBoard: board.getBoard};
 }
 
 const displayController=(()=>{
@@ -332,18 +319,22 @@ const displayController=(()=>{
 
             cellButton.dataset.column=index;
             cellButton.textContent=cell.getVal();
-            console.log(cellButton)
             boardDiv.appendChild(cellButton);
         })
+        if(game.getCurrent().AI){
+            game.aiPlayer();
+            render();
+        }
+
     };
 
     function clickHandler(e){
         const index=e.target.dataset.column;
 
-        game.place(index);
+        if(!game.getCurrent().AI) game.player(index);
         render();
     }
     boardDiv.addEventListener('click', clickHandler);
-    render()
+    render();
 })();
 
