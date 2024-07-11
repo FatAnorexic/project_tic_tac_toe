@@ -23,8 +23,10 @@ function gameBoard(){
         board[idx].addChar(char);
     };
     
+    /*
     //Make the actual board private and display as needed. This board will need to be converted to a 2d Array
     //for playing in the console. 
+    
     const displayBoard=()=>{
         let copy=board.map((cell)=>cell.getVal()); //another way is to say copy=[].concat(board) then map the value when running through the while loop. 
         
@@ -32,7 +34,7 @@ function gameBoard(){
          while(copy.length) boardVal.push(copy.splice(0,3));
         
         console.log(boardVal);
-    };
+    }; **(LEGACY CODE| DELETE OR MOVE FOR LATER USE->GAME NOW DISPLAYS IN DOM)*/
 
     //Function to clear the board and return everything back to a zeroth state
     const clearBoard=()=>{
@@ -41,7 +43,7 @@ function gameBoard(){
         }
     }
 
-    return {getBoard, displayBoard, markIdx, getInd, clearBoard};
+    return {getBoard, markIdx, getInd, clearBoard};
 }
 
 //This function adds a value of either an empty string or a player character when called.
@@ -203,7 +205,6 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
 
     //Updates the board to the most current round
     const updateBoard=()=>{
-        board.displayBoard();
         console.log(`${getCurrent().name}'s turn.`);
     };
 
