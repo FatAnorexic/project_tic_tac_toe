@@ -178,7 +178,7 @@ function AI(){
 function GameController(playerOne="Player One", playerTwo="Player Two"){
 
     //Creates an array of player objects containing both their name and their Character
-    const contenders=[{name:playerOne, char: "X", score: 0}, {name:playerTwo, char: "O", score: 0}];
+    const contenders=[{name:playerOne, char: "X", score: 0, AI: false}, {name:playerTwo, char: "O", score: 0, AI: true}];
     
 
     //Creates an instance of the game board
@@ -288,6 +288,26 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
             turn();
             updateBoard();
         }
+    }
+
+    const player=(idx)=>{
+        board.markIdx(idx, getCurrent().char);
+
+        if(!check().getWin() && !check().getTie()){
+            turn();
+            updateBoard();
+        }else{
+            win().getMessage();
+            getScore();
+            board.clearBoard();
+            turn();
+            updateBoard();
+        }
+    }
+
+    const aiPlayer=()=>{
+        let choice=AI.findBestMove(board.getBoard(), getCurrent().char);
+        board.markIdx(choice, getCurrent().char);
     }
 
 
