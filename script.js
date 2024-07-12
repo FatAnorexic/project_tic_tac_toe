@@ -284,6 +284,8 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
 
     const aiPlayer=()=>{
         let choice=AI().findBestMove(board.getBoard(), getCurrent().char);
+        
+        
         board.markIdx(choice, getCurrent().char);
 
         if(!check().getWin() && !check().getTie()){
@@ -310,6 +312,8 @@ const displayController=(()=>{
 
     const boardDiv=document.querySelector('.board');
 
+    const delay=(ms)=>new Promise(res=>setTimeout(res, ms));
+
     //This renders the board when the game is loaded into memory
     const render=()=>{
         const board=game.getBoard();
@@ -323,8 +327,12 @@ const displayController=(()=>{
             boardDiv.appendChild(cellButton);
         })
         if(game.getCurrent().AI){
-            game.aiPlayer();
-            render();
+            (async()=>{
+                await delay(500);
+                game.aiPlayer();
+                render();
+            })();
+            
         }
 
     };
