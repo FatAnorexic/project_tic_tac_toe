@@ -182,16 +182,23 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
     //Creates an array of player objects containing both their name and their Character
     const contenders=[{name:playerOne, char: "X", score: 0, AI: false}, {name:playerTwo, char: "O", score: 0, AI: true}];
     
+    //Initialize a variable called round and set it to 1
+    let round=1;
 
+    const setRound=()=>{
+        if(round<5) round++;
+        else round=1;
+    }
+    const getRound=()=>{
+        return round;
+    }
+    
     //Creates an instance of the game board
     const board=gameBoard();
 
     //initialize the contenders and make the variable private by wrapping it into a function
     let currentPlayer=contenders[0];
-
     const getPlayers=()=>contenders;
-    
-    
     const getCurrent=()=>currentPlayer;
 
 
@@ -212,7 +219,6 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
     const check=()=>{
         let win=false, tie=false;
         let count=0;
-
         winStates=[
                    [0,1,2],[3,4,5],[6,7,8],
                    [0,3,6],[1,4,7],[2,5,8],
@@ -242,16 +248,25 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
         const getTie=()=>tie;
 
 
-        return {getWin, getTie};
+        if(!getWin() && !getTie()){
+            turn();
+            updateBoard();
+        }else{
+            winRound(getWin(), getTie()).getMessage();
+            getScore();
+            board.clearBoard();
+            turn();
+            updateBoard();
+        }
     };
-
-    const win=()=>{
+    
+    const winRound=(win, tie)=>{
         let message;
         
-        if(check().getWin()){
+        if(win){
             message=`${getCurrent().name} has won the round!`;
             getCurrent().score++;
-        }else if(check().getTie()){
+        }else if(tie){
             message=`Nobody won this round, as there are no moves left on the board`;
         }
 
@@ -259,45 +274,25 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
         const getMessage=()=>{console.log(message);};
 
         return {getMessage};
-    }
+    };
+    
 
     /*
-    **place function that takes a numerical value from the player and pushes it to the markIdx function 
-    **after the character is placed, call the win/tie functions to see if either are met. If not,
-    **call the switch and update board functions
+    **player and AI functions. Both operate fundementally the same with the exception that one takes the index that
+    **has been clicked on. While the other takes no index, and instead used the AI function to find the index to place
+    **the character on. 
     */
 
     const player=(idx)=>{
         board.markIdx(idx, getCurrent().char);
-
-        if(!check().getWin() && !check().getTie()){
-            turn();
-            updateBoard();
-        }else{
-            win().getMessage();
-            getScore();
-            board.clearBoard();
-            turn();
-            updateBoard();
-        }
+        check();
     }
 
     const aiPlayer=()=>{
         let choice=AI().findBestMove(board.getBoard(), getCurrent().char);
-        
-        
         board.markIdx(choice, getCurrent().char);
 
-        if(!check().getWin() && !check().getTie()){
-            turn();
-            updateBoard();
-        }else{
-            win().getMessage();
-            getScore();
-            board.clearBoard();
-            turn();
-            updateBoard();
-        }
+        check();
     }
 
 
@@ -312,6 +307,7 @@ const displayController=(()=>{
 
     const boardDiv=document.querySelector('.board');
 
+    //This is to delay the AI from executing too fast, and gives the illusion that the computer is thinking
     const delay=(ms)=>new Promise(res=>setTimeout(res, ms));
 
     //This renders the board when the game is loaded into memory
