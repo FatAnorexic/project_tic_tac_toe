@@ -190,9 +190,18 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
         else round=1;
     }
     const getRound=()=>{
-        return round;
+        return {round};
     }
-    
+    //Ends the current round and moves onto the next
+    const endRound=()=>{
+        if(getRound().round<5){
+            setRound();
+            getScore();
+            board.clearBoard();
+            turn();
+            updateBoard();
+        }
+    }
     //Creates an instance of the game board
     const board=gameBoard();
 
@@ -253,10 +262,7 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
             updateBoard();
         }else{
             winRound(getWin(), getTie()).getMessage();
-            getScore();
-            board.clearBoard();
-            turn();
-            updateBoard();
+            endRound();
         }
     };
     
@@ -276,7 +282,7 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
         return {getMessage};
     };
     
-
+    
     /*
     **player and AI functions. Both operate fundementally the same with the exception that one takes the index that
     **has been clicked on. While the other takes no index, and instead used the AI function to find the index to place
