@@ -184,7 +184,9 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
     
     //Initialize a variable called round and set it to 1
     let round=1;
+    let continueGame=true;
 
+    const getContinue=()=>continueGame;
     const setRound=()=>{
         if(round<5) round++;
         else round=1;
@@ -224,8 +226,9 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
         let choice=parseInt(prompt(`Would you like to play another round? 1 for yes 0 for no.`));
         if(choice===1){
             resetGame();
+        }else{
+            continueGame=false;
         }
-        return;
     }
 
     //Reset game is a function to reset the contents of the game back to default values->can be triggered at anytime
@@ -346,7 +349,8 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
         player, 
         aiPlayer, 
         getCurrent, 
-        getPlayers, 
+        getPlayers,
+        getContinue, 
         resetGame, 
         board, 
         getBoard: board.getBoard
@@ -363,6 +367,7 @@ const displayController=(()=>{
 
     //This renders the board when the game is loaded into memory
     const render=()=>{
+        if(!game.getContinue()) return;
         const board=game.getBoard();
         boardDiv.textContent='';
         board.forEach((cell, index)=>{
