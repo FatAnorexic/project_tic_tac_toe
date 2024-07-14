@@ -200,8 +200,45 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
             board.clearBoard();
             turn();
             updateBoard();
+        }else{
+            endGame();
         }
     }
+
+    //Function that exectutes at the end of Every game->uses the resetGame function to bring everything back to start
+    const endGame=()=>{
+        const one=getPlayers()[0].score;
+        const two=getPlayers()[1].score;
+        
+        //Get the winner for the game
+        if(one>two){
+            console.log(`${getPlayers()[0].name} won the game!`);
+        }else if(two>one){
+            console.log(`${getPlayers()[1].name} won the game!`);
+        }else{
+            console.log(`Both players tied:`)
+            console.log(`${getPlayers()[0].name} score: ${one}`);
+            console.log(`${getPlayers()[1].name} score: ${two}`);
+        }
+
+        let choice=parseInt(prompt(`Would you like to play another round? 1 for yes 0 for no.`));
+        if(choice===1){
+            resetGame();
+        }
+        return;
+    }
+
+    //Reset game is a function to reset the contents of the game back to default values->can be triggered at anytime
+    const resetGame=()=>{
+        for(let x=0;x<getPlayers().length;x++){
+            getPlayers()[x].score=0;
+        }
+        round=1;
+        board.clearBoard();
+        currentPlayer=contenders[0];
+        updateBoard();
+    }
+
     //Creates an instance of the game board
     const board=gameBoard();
 
@@ -305,7 +342,15 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
     //initialize the board upon loading
     updateBoard();
 
-    return {player, aiPlayer, getCurrent, check, getPlayers, board, getBoard: board.getBoard};
+    return {
+        player, 
+        aiPlayer, 
+        getCurrent, 
+        getPlayers, 
+        resetGame, 
+        board, 
+        getBoard: board.getBoard
+    };
 }
 
 const displayController=(()=>{
