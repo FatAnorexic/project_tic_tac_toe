@@ -1,4 +1,11 @@
 
+
+
+/*  */
+body{
+    display: flex;
+    justify-content: center;
+}
 /* make the board a grid display */
 .board{
     display: grid;
