@@ -352,22 +352,45 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
         getPlayers,
         getContinue, 
         resetGame, 
-        board, 
+        board,
+        getRound, 
         getBoard: board.getBoard
     };
 }
 
 const displayController=(()=>{
+    //Assign a constant to run the game controller
     const game=GameController();
 
+
+    // Get the player elements from HTML
+    const playerOne=document.getElementById('nameOne');
+    const playerTwo=document.getElementById('nameTwo');
+    const scoreOne=document.getElementById('scoreNumOne');
+    const scoreTwo=document.getElementById('scoreNumTwo');
+
+    //Select the span element that will display the current round on screen
+    const round=document.getElementById('roundNum');
+
+    //Select the div element that will display the board on the page
     const boardDiv=document.querySelector('.board');
 
     //This is to delay the AI from executing too fast, and gives the illusion that the computer is thinking
     const delay=(ms)=>new Promise(res=>setTimeout(res, ms));
 
+    //FF that updates all statistics like score, names and round number
+    const stats=()=>{
+        playerOne.textContent=game.getPlayers()[0].name;
+        playerTwo.textContent=game.getPlayers()[1].name;
+        scoreOne.textContent=game.getPlayers()[0].score;
+        scoreTwo.textContent=game.getPlayers()[1].score;
+        round.textContent=game.getRound().round;
+    }
+
     //This renders the board when the game is loaded into memory
     const render=()=>{
         if(!game.getContinue()) return;
+        stats();
         const board=game.getBoard();
         boardDiv.textContent='';
         board.forEach((cell, index)=>{
