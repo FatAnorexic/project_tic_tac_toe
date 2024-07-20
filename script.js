@@ -187,6 +187,11 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
     let continueGame=true;
 
     const getContinue=()=>continueGame;
+    //allows manipulation of the continue state, while keeping it private
+    const setContinue=(flag)=>{
+        continueGame=flag;
+    }
+
     const setRound=()=>{
         if(round<5) round++;
         else round=1;
@@ -350,7 +355,8 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
         aiPlayer, 
         getCurrent, 
         getPlayers,
-        getContinue, 
+        getContinue,
+        setContinue, 
         resetGame, 
         board,
         getRound, 
@@ -382,6 +388,10 @@ const displayController=(()=>{
 
     //Select the div element that will display the board on the page
     const boardDiv=document.querySelector('.board');
+
+    //Selects the endgame and reset buttons
+    const reset=document.getElementById('resetGame');
+    const end=document.getElementById('endGame');
 
     //This is to delay the AI from executing too fast, and gives the illusion that the computer is thinking
     const delay=(ms)=>new Promise(res=>setTimeout(res, ms));
@@ -427,6 +437,18 @@ const displayController=(()=>{
         render();
     }
     boardDiv.addEventListener('click', clickHandler);
+
+    //two event handlers that change the state of the game, and then calls render
+    reset.addEventListener('click', ()=>{
+        game.resetGame();
+        render();
+    });
+
+    end.addEventListener('click', ()=>{
+        game.setContinue(false);
+        render();
+    });
+    
     render();
 })();
 
