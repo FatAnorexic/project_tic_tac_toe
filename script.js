@@ -6,10 +6,20 @@
 
 const titleScreen=(()=>{
     const start=document.getElementById('startGame');
+    const displayGame=document.getElementById('game');
+    const displayTitle=document.getElementById('titleScreen');
+
+
+    //if the title screen display is none, set the display back to initial state
+    if(displayTitle.style.display=='none'){
+        displayTitle.style.display='block';
+    }
 
     //function that when executed will render the game board and set all parameters to the game controller
     function startGame(){
         const game=GameController();
+        displayTitle.style.display='none';
+        displayGame.style.display='flex';
         displayController(game);
     }
 
@@ -422,6 +432,7 @@ function displayController(game){
 
     //This renders the board when the game is loaded into memory
     const render=()=>{
+        //if we end the game, we return to the title screen
         if(!game.getContinue()) return;
         stats();
         const board=game.getBoard();
