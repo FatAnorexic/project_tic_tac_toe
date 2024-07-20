@@ -1,3 +1,14 @@
+/* 
+**This will load the title screen immediately upon loading the page. It will be responsible for displaying
+**certain settings options such as setting player names, choosing avatars, x or o, and ai or player oponents.
+**It will be the one to create an instance of the game controller, and will pass this along to the display controller.
+*/
+
+const titleScreen=(()=>{
+
+})(0);
+
+
 
 
 // This is the basic game board. Each row houses 3 columns. Each of these columns can take 
