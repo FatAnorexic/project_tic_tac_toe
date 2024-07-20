@@ -4,7 +4,7 @@
 **It will be the one to create an instance of the game controller, and will pass this along to the display controller.
 */
 
-const titleScreen=(()=>{
+const titleScreen=(function title(){
     const start=document.getElementById('startGame');
     const displayGame=document.getElementById('game');
     const displayTitle=document.getElementById('titleScreen');
@@ -433,7 +433,9 @@ function displayController(game){
     //This renders the board when the game is loaded into memory
     const render=()=>{
         //if we end the game, we return to the title screen
-        if(!game.getContinue()) return;
+        if(!game.getContinue()){
+            location.reload();
+        }
         stats();
         const board=game.getBoard();
         boardDiv.textContent='';
