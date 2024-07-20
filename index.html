@@ -9,11 +9,14 @@
 </head>
 <body>
     <header class="head" id="head">
-        <button class="endGame" id="endGame">end game</button>
-        <button class="resetGame" id="resetGame">Reset Game</button>
+        
     </header>
     <main class="main" id="main">
-
+        
+        <div class="titleScreen" id="titleScreen">
+            <button class="startGame" id="startGame">Start Game</button>
+        </div>
+        
         <div class="game" id="game">
             <div class="playerOne" id="playerOne">
                 <div class="nameoOne" id="nameOne"></div>
@@ -31,9 +34,11 @@
                 </div>
                 <div class="scoreTwo" id="scoreTwo">Score: <span id="scoreNumTwo"></span></div>
             </div>
+            <button class="endGame" id="endGame">end game</button>
+            <button class="resetGame" id="resetGame">Reset Game</button>
+            <div class="round" id="round">Round: <span id="roundNum"></span> </div>
         </div>
 
-        <div class="round" id="round">Round: <span id="roundNum"></span> </div>
     </main>
 </body>
 </html>
