@@ -448,7 +448,8 @@ const displayController=(()=>{
         game.setContinue(false);
         render();
     });
-    
+
     render();
+    
 })();
 
