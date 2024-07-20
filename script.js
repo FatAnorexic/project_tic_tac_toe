@@ -427,9 +427,7 @@ function displayController(game){
     //This renders the board when the game is loaded into memory
     const render=()=>{
         //if we end the game, we return to the title screen
-        if(!game.getContinue()){
-            location.reload();
-        }
+        if(!game.getContinue()) location.reload();
         stats();
         const board=game.getBoard();
         boardDiv.textContent='';
