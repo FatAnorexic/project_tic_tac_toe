@@ -5,7 +5,15 @@
 */
 
 const titleScreen=(()=>{
+    const start=document.getElementById('startGame');
 
+    //function that when executed will render the game board and set all parameters to the game controller
+    function startGame(){
+        const game=GameController();
+        displayController(game);
+    }
+
+    start.addEventListener('click', startGame);
 })(0);
 
 
@@ -383,11 +391,7 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
 **our actual script and giving visual information to the player/s. 
 */
 
-const displayController=(()=>{
-    //Assign a constant to run the game controller
-    const game=GameController();
-
-
+function displayController(game){
     // Get the player elements from HTML
     const playerOne=document.getElementById('nameOne');
     const playerTwo=document.getElementById('nameTwo');
@@ -462,5 +466,5 @@ const displayController=(()=>{
 
     render();
     
-})();
+}
 
