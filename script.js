@@ -9,12 +9,6 @@ const titleScreen=(function title(){
     const displayGame=document.getElementById('game');
     const displayTitle=document.getElementById('titleScreen');
 
-
-    //if the title screen display is none, set the display back to initial state
-    if(displayTitle.style.display=='none'){
-        displayTitle.style.display='block';
-    }
-
     //function that when executed will render the game board and set all parameters to the game controller
     function startGame(){
         const game=GameController();
