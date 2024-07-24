@@ -8,10 +8,18 @@ const titleScreen=(function title(){
     const start=document.getElementById('startGame');
     const displayGame=document.getElementById('game');
     const displayTitle=document.getElementById('titleScreen');
-
+    
+    //Function that gets both player values, and returns them as an object to be passed to game controller
+    const getPlayerValues=()=>{
+        // Checks if the input field is blank, and returns a default if it is. returns the name if it is not
+        const oneName=document.getElementById('player_one_name').value== '' ? "Player One":document.getElementById('player_one_name').value;
+        const twoName=document.getElementById('player_two_name').value== '' ? "Player Two":document.getElementById('player_two_name').value;
+        
+        return {oneName, twoName};
+    }
     //function that when executed will render the game board and set all parameters to the game controller
     function startGame(){
-        const game=GameController();
+        const game=GameController(getPlayerValues().oneName, getPlayerValues().twoName);
         displayTitle.style.display='none';
         displayGame.style.display='flex';
         displayController(game);
@@ -200,7 +208,7 @@ function AI(){
 **to the game. Players will also be able to input their name and will be assigned strings.
 */
 
-function GameController(playerOne="Player One", playerTwo="Player Two"){
+function GameController(playerOne, playerTwo){
 
     //Creates an array of player objects containing both their name and their Character
     const contenders=[{name:playerOne, char: "X", score: 0, AI: false}, {name:playerTwo, char: "O", score: 0, AI: true}];
