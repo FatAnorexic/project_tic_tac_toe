@@ -12,9 +12,17 @@
         <h1 class="titleHeader">Tic Tac Toe</h1>
     </header>
     <main class="main" id="main">
-
+        
         <div class="titleScreen" id="titleScreen" style="display: block;">
+            <div>
+                <label for="player_one_name">Player one</label>
+                <input type="text" id="player_one_name" name="player_one_name" placeholder="Player One">
+            </div>
             <button class="startGame" id="startGame">Start Game</button>
+            <div>
+                <label for="player_two_name">Player Two</label>
+                <input type="text" id="player_two_name" name="player_two_name" placeholder="Player Two">
+            </div>
         </div>
         
         <!-- the display is initially set to none in order to prevent the game wrapper from loaing before game start -->

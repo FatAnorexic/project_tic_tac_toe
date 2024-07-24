@@ -389,10 +389,8 @@ function GameController(playerOne="Player One", playerTwo="Player Two"){
 
 /*
 **This function handles all things related to interactivity between the game controller and displaying those contents to
-**the player. The reason for making it an IIFE is to ensure it launches the moment the page for it loads. This 
-**may change later on, when creating a start screen that will animate into the game, but for now it should execute
-**without any call. There also should not be any return values in here, as we are merely plugging in the content from
-**our actual script and giving visual information to the player/s. 
+**the player. There also should not be any return values in here, as we are merely plugging in the
+**content from our actual script and giving visual information to the player/s. 
 */
 
 function displayController(game){
