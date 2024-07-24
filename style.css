@@ -10,6 +10,10 @@ body{
 }
 
 /* Main conatiner design */
+/* Title screen design */
+.titleScreen{
+    gap: 2rem;
+}
 .game{
     display: flex;
     align-items: center;
