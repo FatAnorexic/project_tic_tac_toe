@@ -19,7 +19,8 @@ const titleScreen=(function title(){
     }
     //function that when executed will render the game board and set all parameters to the game controller
     function startGame(){
-        const game=GameController(getPlayerValues().oneName, getPlayerValues().twoName);
+        const play=getPlayerValues();
+        const game=GameController(play.oneName, play.twoName);
         displayTitle.style.display='none';
         displayGame.style.display='flex';
         displayController(game);
