@@ -116,8 +116,8 @@ function indexValue(){
 **https://www.geeksforgeeks.org/finding-optimal-move-in-tic-tac-toe-using-minimax-algorithm-in-game-theory/
 */
 
-function AI(){
-    let game=GameController();
+function AI(maximizer, minimizer){
+    
     const isMovesLeft=(board)=>{
         let state=board.map(({addChar, getVal})=>getVal());
         for(let x=0;x<state.length;x++){
@@ -146,9 +146,9 @@ function AI(){
         }
         
         if(win){
-            if(player==game.getPlayers()[1].char){
+            if(player==maximizer){
                 return +10;
-            }else if(player==game.getPlayers()[0].char){
+            }else if(player==minimizer){
                 return -10;
             }
         }
@@ -162,13 +162,13 @@ function AI(){
         if(score==-10) return score;
         if(isMovesLeft(board)==false) return 0;
 
-        if(player==game.getPlayers()[1].char){
+        if(player==maximizer){
             let best=-1000;
             for(let x=0;x<board.length;x++){
                 if(board[x].getVal()==''){
                     board[x].addChar(player);
 
-                    best=Math.max(best, minimax(board, depth+1, game.getPlayers()[0].char));
+                    best=Math.max(best, minimax(board, depth+1, minimizer));
                     board[x].addChar('');
                 }
             }
@@ -177,8 +177,8 @@ function AI(){
             let best=1000;
             for(let x=0;x<board.length;x++){
                 if(board[x].getVal()==''){
-                    board[x].addChar(game.getPlayers()[0].char);
-                    best=Math.min(best, minimax(board, depth+1, game.getPlayers()[1].char));
+                    board[x].addChar(minimizer);
+                    best=Math.min(best, minimax(board, depth+1, maximizer));
                     board[x].addChar('');
                 }
             }
@@ -195,7 +195,7 @@ function AI(){
             if(board[x].getVal()==''){
                 board[x].addChar(player);
 
-                let value=minimax(board, 0, game.getPlayers()[0].char);
+                let value=minimax(board, 0, minimizer);
 
                 board[x].addChar('');
 
@@ -386,7 +386,10 @@ function GameController(playerOne, playerTwo, pOneChar, pTwoChar){
     }
 
     const aiPlayer=()=>{
-        let choice=AI().findBestMove(board.getBoard(), getCurrent().char);
+        let maximizer=getCurrent().char;
+        // Find the current minimizer for minimax function
+        let minimizer = getCurrent().char==contenders[1].char ? contenders[0].char:contenders[1].char;
+        let choice=AI(maximizer, minimizer).findBestMove(board.getBoard(), maximizer);
         board.markIdx(choice, getCurrent().char);
 
         check();
