@@ -34,7 +34,7 @@ const titleScreen=(function title(){
     //function that when executed will render the game board and set all parameters to the game controller
     function startGame(){
         const play=getPlayerValues();
-        const game=GameController(play.oneName, play.twoName);
+        const game=GameController(play.oneName, play.twoName, play.charOne, play.charTwo);
         displayTitle.style.display='none';
         displayGame.style.display='flex';
         displayController(game);
@@ -223,10 +223,10 @@ function AI(){
 **to the game. Players will also be able to input their name and will be assigned strings.
 */
 
-function GameController(playerOne, playerTwo){
+function GameController(playerOne, playerTwo, pOneChar, pTwoChar){
 
     //Creates an array of player objects containing both their name and their Character
-    const contenders=[{name:playerOne, char: "X", score: 0, AI: false}, {name:playerTwo, char: "O", score: 0, AI: true}];
+    const contenders=[{name:playerOne, char: pOneChar, score: 0, AI: false}, {name:playerTwo, char: pTwoChar, score: 0, AI: true}];
     
     //Initialize a variable called round and set it to 1
     let round=1;
