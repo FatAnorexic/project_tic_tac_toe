@@ -14,8 +14,22 @@ const titleScreen=(function title(){
         // Checks if the input field is blank, and returns a default if it is. returns the name if it is not
         const oneName=document.getElementById('player_one_name').value== '' ? "Player One":document.getElementById('player_one_name').value;
         const twoName=document.getElementById('player_two_name').value== '' ? "Player Two":document.getElementById('player_two_name').value;
-        console.log(document.querySelector('#playerOneChar:checked').value);
-        return {oneName, twoName};
+
+        // Selects the characters for player one and player two|if the two values are the same Player one defaultes to the other
+        let charOne=document.querySelector('#playerOneChar:checked').value;
+        let charTwo=document.querySelector('#playerTwoChar:checked').value;
+        if(charOne=='X' && charTwo=='X'){
+            charOne='O';
+        }else if(charOne=='O' && charTwo=='O'){
+            charOne='X';
+        }
+
+        return {
+            oneName, 
+            twoName,
+            charOne,
+            charTwo
+        };
     }
     //function that when executed will render the game board and set all parameters to the game controller
     function startGame(){
