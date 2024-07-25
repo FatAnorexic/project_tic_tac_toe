@@ -177,7 +177,7 @@ function AI(maximizer, minimizer){
             let best=1000;
             for(let x=0;x<board.length;x++){
                 if(board[x].getVal()==''){
-                    board[x].addChar(minimizer);
+                    board[x].addChar(player);
                     best=Math.min(best, minimax(board, depth+1, maximizer));
                     board[x].addChar('');
                 }
@@ -196,9 +196,8 @@ function AI(maximizer, minimizer){
                 board[x].addChar(player);
 
                 let value=minimax(board, 0, minimizer);
-
                 board[x].addChar('');
-
+                
                 if(value>bestVal){
                     bestMove=x;
                     bestVal=value;
