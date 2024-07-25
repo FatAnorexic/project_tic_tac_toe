@@ -14,7 +14,7 @@ const titleScreen=(function title(){
         // Checks if the input field is blank, and returns a default if it is. returns the name if it is not
         const oneName=document.getElementById('player_one_name').value== '' ? "Player One":document.getElementById('player_one_name').value;
         const twoName=document.getElementById('player_two_name').value== '' ? "Player Two":document.getElementById('player_two_name').value;
-        
+        console.log(document.querySelector('#playerOneChar:checked').value);
         return {oneName, twoName};
     }
     //function that when executed will render the game board and set all parameters to the game controller
