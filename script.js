@@ -8,7 +8,16 @@ const titleScreen=(function title(){
     const start=document.getElementById('startGame');
     const displayGame=document.getElementById('game');
     const displayTitle=document.getElementById('titleScreen');
-    
+    const playerOneImage=document.getElementById('image One');
+    const playerTwoImage=document.getElementById('image Two');
+
+    // Factory function that sets the Avatar images for players
+    const setPlayerAvatar=()=>{
+        const avOne=document.querySelector('.avatar.One');
+        const avTwo=document.querySelector('.avatar.Two');
+        avOne.appendChild(playerOneImage);
+        avTwo.appendChild(playerTwoImage);
+    }
     
     //Function that gets both player values, and returns them as an object to be passed to game controller
     const getPlayerValues=()=>{
@@ -42,6 +51,7 @@ const titleScreen=(function title(){
     //function that when executed will render the game board and set all parameters to the game controller
     function startGame(){
         const play=getPlayerValues();
+        setPlayerAvatar();
         const game=GameController(play.oneName, play.twoName, play.charOne, play.charTwo, play.aiOne, play.aiTwo);
         displayTitle.style.display='none';
         displayGame.style.display='flex';
