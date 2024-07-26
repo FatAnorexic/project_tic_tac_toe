@@ -87,19 +87,6 @@ function gameBoard(){
         board[idx].addChar(char);
     };
     
-    /*
-    //Make the actual board private and display as needed. This board will need to be converted to a 2d Array
-    //for playing in the console. 
-    
-    const displayBoard=()=>{
-        let copy=board.map((cell)=>cell.getVal()); //another way is to say copy=[].concat(board) then map the value when running through the while loop. 
-        
-        const boardVal=[];
-         while(copy.length) boardVal.push(copy.splice(0,3));
-        
-        console.log(boardVal);
-    }; **(LEGACY CODE| DELETE OR MOVE FOR LATER USE->GAME NOW DISPLAYS IN DOM)*/
-
     //Function to clear the board and return everything back to a zeroth state
     const clearBoard=()=>{
         for(let x=0;x<board.length;x++){
@@ -513,3 +500,21 @@ function displayController(game){
     
 }
 
+/*
+**Legacy Code: This is code stored at the bottom of the page incase future updates require the creation/implementation of out of use code.
+**    gameBoard(){
+**        ...
+**        ...
+**        //Make the actual board private and display as needed. This board will need to be converted to a 2d Array
+**        //for playing in the console. 
+**
+**        const displayBoard=()=>{
+**            let copy=board.map((cell)=>cell.getVal()); //another way is to say copy=[].concat(board) then map the value when running through the while loop. 
+**
+**            const boardVal=[];
+**             while(copy.length) boardVal.push(copy.splice(0,3));
+**
+**            console.log(boardVal);
+**        }; **(LEGACY CODE| DELETE OR MOVE FOR LATER USE->GAME NOW DISPLAYS IN DOM)
+**    }
+*/
