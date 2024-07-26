@@ -9,6 +9,7 @@ const titleScreen=(function title(){
     const displayGame=document.getElementById('game');
     const displayTitle=document.getElementById('titleScreen');
     
+    
     //Function that gets both player values, and returns them as an object to be passed to game controller
     const getPlayerValues=()=>{
         // Checks if the input field is blank, and returns a default if it is. returns the name if it is not
