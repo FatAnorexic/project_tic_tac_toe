@@ -24,17 +24,24 @@ const titleScreen=(function title(){
             charOne='X';
         }
 
+        // Get the AI status of both players
+        const aiOne=document.querySelector('#playerOneAI:checked').value=='false' ? false:true;
+        const aiTwo=document.querySelector('#playerTwoAI:checked').value=='false' ? false:true;
+        
+
         return {
             oneName, 
             twoName,
             charOne,
-            charTwo
+            charTwo,
+            aiOne,
+            aiTwo
         };
     }
     //function that when executed will render the game board and set all parameters to the game controller
     function startGame(){
         const play=getPlayerValues();
-        const game=GameController(play.oneName, play.twoName, play.charOne, play.charTwo);
+        const game=GameController(play.oneName, play.twoName, play.charOne, play.charTwo, play.aiOne, play.aiTwo);
         displayTitle.style.display='none';
         displayGame.style.display='flex';
         displayController(game);
@@ -222,11 +229,10 @@ function AI(maximizer, minimizer){
 **to the game. Players will also be able to input their name and will be assigned strings.
 */
 
-function GameController(playerOne, playerTwo, pOneChar, pTwoChar){
+function GameController(playerOne, playerTwo, pOneChar, pTwoChar, aiOne, aiTwo){
 
     //Creates an array of player objects containing both their name and their Character
-    const contenders=[{name:playerOne, char: pOneChar, score: 0, AI: false}, {name:playerTwo, char: pTwoChar, score: 0, AI: true}];
-    
+    const contenders=[{name:playerOne, char: pOneChar, score: 0, AI: aiOne}, {name:playerTwo, char: pTwoChar, score: 0, AI: aiTwo}];
     //Initialize a variable called round and set it to 1
     let round=1;
     let continueGame=true;
