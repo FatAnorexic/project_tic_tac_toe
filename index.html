@@ -17,25 +17,43 @@
             <div>
                 <label for="player_one_name">Player one</label>
                 <input type="text" id="player_one_name" name="player_one_name" placeholder="Player One">
+                
+                <!-- Character selection for player one -->
                 <div class="radioButton">
-                    <!-- Character selection for player one -->
                     <input type="radio" id="playerOneChar" name="playerOneChar" value="X" checked>
                     <label for="playerOneChar">X</label>
                     <input type="radio" id="playerOneChar" name="playerOneChar" value="O">
                     <label for="playerOneChar">O</label>
                 </div>
+
+                <!-- AI radio buttons -->
+                 <div class="radioButton">
+                    <input type="radio" id="playerOneAI" name="playerOneAI" value="false" checked>
+                    <label for="playerOneAI">Human</label>
+                    <input type="radio" id="playerOneAI" name="playerOneAI" value="true">
+                    <label for="playerOneAI">AI</label>
+                 </div>
             </div>
             <button class="startGame" id="startGame">Start Game</button>
             <div>
                 <label for="player_two_name">Player Two</label>
                 <input type="text" id="player_two_name" name="player_two_name" placeholder="Player Two">
+                
+                <!-- Character selection for player two -->
                 <div class="radioButton">
-                    <!-- Character selection for player two -->
                     <input type="radio" id="playerTwoChar" name="playerTwoChar" value="X">
                     <label for="playerTwoChar">X</label>
                     <input type="radio" id="playerTwoChar" name="playerTwoChar" value="O" checked>
                     <label for="playerTwoChar">O</label>
                 </div>
+
+                <!-- AI radio buttons player two -->
+                 <div class="radioButton">
+                    <input type="radio" id="playerTwoAI" name="playerTwoAI" value="false">
+                    <label for="playerTwoAI">Human</label>
+                    <input type="radio" id="playerTwoAI" name="playerTwoAI" value="true" checked>
+                    <label for="playerTwoAI">AI</label>
+                 </div>
             </div>
         </div>
         
