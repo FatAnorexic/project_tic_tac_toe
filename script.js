@@ -122,18 +122,13 @@ function indexValue(){
 */
 
 function AI(maximizer, minimizer){
-    
-    const isMovesLeft=(board)=>{
-        let state=board.map(({addChar, getVal})=>getVal());
-        for(let x=0;x<state.length;x++){
-            if(state[x]=='') return true;
-        }
-        return false;
-    }
 
+    const emptyCells=(board)=>{
+        return board.filter(empty=>empty.getVal()==='');
+    };
     //evaluate the board for win conditions
-    const evaluate=(board, player)=>{
-        let win=false;
+    const evaluate=(board)=>{
+        let win=null;
 
         winStates=[
                     [0,1,2],[3,4,5],[6,7,8],
@@ -145,49 +140,52 @@ function AI(maximizer, minimizer){
         //Checks if win has been met
         for(let i=0;i<winStates.length;i++){
             [x,y,z]=winStates[i];
-            if(status[x]===player && status[y]===player && status[z]===player){
-                win=true;
+            if(status[x]===maximizer && status[y]===maximizer && status[z]===maximizer){
+                win=maximizer;
+            }else if(status[x]===minimizer && status[y]===minimizer && status[z]===minimizer){
+                win=minimizer;
             }
         }
-        
-        if(win){
-            if(player==maximizer){
-                return +10;
-            }else if(player==minimizer){
-                return -10;
-            }
+        if(win==null && emptyCells(board).length==0){
+            return 'tie';
+        }else{
+            return win;
         }
-        return 0;
     };
 
+    
     //Return the index and score of the next best move. it takes the player char and game board as arguments
     const minimax=(board, depth, player)=>{
-        let score=evaluate(board, player);
-        if(score==10) return score;
-        if(score==-10) return score;
-        if(isMovesLeft(board)==false) return 0;
-
+        let result=evaluate(board);
+        let score={
+            O: maximizer=='O'?10:-10,
+            X: minimizer=='X'?-10:10,
+            tie: 0
+        }
+        if(result!==null){
+            return score[result]
+        }
+        
         if(player==maximizer){
-            let best=-1000;
+            let bestScore=-1000;
             for(let x=0;x<board.length;x++){
                 if(board[x].getVal()==''){
                     board[x].addChar(player);
-
-                    best=Math.max(best, minimax(board, depth+1, minimizer));
+                    bestScore=Math.max(bestScore,minimax(board, depth+1, minimizer));
                     board[x].addChar('');
                 }
             }
-            return best;
+            return bestScore;
         }else{
-            let best=1000;
+            let bestScore=1000;
             for(let x=0;x<board.length;x++){
                 if(board[x].getVal()==''){
                     board[x].addChar(player);
-                    best=Math.min(best, minimax(board, depth+1, maximizer));
+                    bestScore=Math.min(bestScore,minimax(board, depth+1, maximizer));
                     board[x].addChar('');
                 }
             }
-            return best
+            return bestScore
         }
     };
     
@@ -201,8 +199,8 @@ function AI(maximizer, minimizer){
                 board[x].addChar(player);
 
                 let value=minimax(board, 0, minimizer);
+                console.log(value)
                 board[x].addChar('');
-                
                 if(value>bestVal){
                     bestMove=x;
                     bestVal=value;
