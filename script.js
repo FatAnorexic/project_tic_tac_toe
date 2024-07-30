@@ -10,7 +10,8 @@ const titleScreen=(function title(){
     const displayTitle=document.getElementById('titleScreen');
     const playerOneImage=document.getElementById('image One');
     const playerTwoImage=document.getElementById('image Two');
-    
+    let isAIOne=document.querySelectorAll('#playerOneAI');
+    let isAITwo=document.querySelectorAll('#playerTwoAI');
     
 
     // Factory function that sets the Avatar images for players
@@ -19,6 +20,16 @@ const titleScreen=(function title(){
         const avTwo=document.querySelector('.avatar.Two');
         avOne.appendChild(playerOneImage);
         avTwo.appendChild(playerTwoImage);
+    }
+
+    // Set the form to display or not
+    const setForm=(event)=>{
+        let formChange=event.target.name=='playerOneAI'? document.querySelector('.challengeFormOne'):document.querySelector('.challengeFormTwo');
+        if(event.target.value=='true'){
+            formChange.style.display='block';
+        }else{
+            formChange.style.display='none';
+        }
     }
     
     //Function that gets both player values, and returns them as an object to be passed to game controller
@@ -51,7 +62,7 @@ const titleScreen=(function title(){
         };
     }
     //function that when executed will render the game board and set all parameters to the game controller
-    function startGame(){
+    const startGame=()=>{
         const play=getPlayerValues();
         setPlayerAvatar();
         const game=GameController(play.oneName, play.twoName, play.charOne, play.charTwo, play.aiOne, play.aiTwo);
@@ -60,6 +71,8 @@ const titleScreen=(function title(){
         displayController(game);
     }
 
+    isAIOne.forEach(radioBtn=>radioBtn.addEventListener('click', setForm));
+    isAITwo.forEach(radioBtn=>radioBtn.addEventListener('click', setForm));
     start.addEventListener('click', startGame);
 })(0);
 
