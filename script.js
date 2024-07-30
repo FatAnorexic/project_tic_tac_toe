@@ -22,7 +22,7 @@ const titleScreen=(function title(){
         avTwo.appendChild(playerTwoImage);
     }
 
-    // Set the form to display or not
+    // Set the difficulty level to display or not based on Human or AI selection
     const setForm=(event)=>{
         let formChange=event.target.name=='playerOneAI'? document.querySelector('.challengeFormOne'):document.querySelector('.challengeFormTwo');
         if(event.target.value=='true'){
