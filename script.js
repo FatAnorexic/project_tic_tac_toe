@@ -11,6 +11,7 @@ const titleScreen=(function title(){
     const playerOneImage=document.getElementById('image One');
     const playerTwoImage=document.getElementById('image Two');
     
+    
 
     // Factory function that sets the Avatar images for players
     const setPlayerAvatar=()=>{
