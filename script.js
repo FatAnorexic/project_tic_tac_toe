@@ -20,7 +20,7 @@ const titleScreen=(function title(){
         const avTwo=document.querySelector('.avatar.Two');
         avOne.appendChild(playerOneImage);
         avTwo.appendChild(playerTwoImage);
-    }
+    };
 
     // Set the difficulty level to display or not based on Human or AI selection
     const setForm=(event)=>{
@@ -30,7 +30,16 @@ const titleScreen=(function title(){
         }else{
             formChange.style.display='none';
         }
-    }
+    };
+
+    const aiPrecision=(ai)=>{
+        /* 
+        **Get the AI difficulty level. If it is false, we pass a null value.
+        **If true, a switch statement yields a decimal value based on the string in the dropdown box.
+        **This 'precision' value will later be a threshold for determining if the AI will use a random
+        **move, or the optimal move using minimax.
+        */
+    };
     
     //Function that gets both player values, and returns them as an object to be passed to game controller
     const getPlayerValues=()=>{
@@ -50,6 +59,12 @@ const titleScreen=(function title(){
         // Get the AI status of both players
         const aiOne=document.querySelector('#playerOneAI:checked').value=='false' ? false:true;
         const aiTwo=document.querySelector('#playerTwoAI:checked').value=='false' ? false:true;
+
+        // Call to set AI accuracy
+        const aiAccuracyOne=aiPrecision(aiOne);
+        const aiAccuracyTwo=aiPrecision(aiTwo);
+        
+
         
 
         return {
