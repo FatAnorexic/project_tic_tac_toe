@@ -78,16 +78,15 @@ const titleScreen=(function title(){
         const aiAccuracyOne=aiPrecision(aiOne, menuOne);
         const aiAccuracyTwo=aiPrecision(aiTwo, menuTwo);
         
-        console.log(aiAccuracyOne)
-        console.log(aiAccuracyTwo)
-
         return {
             oneName, 
             twoName,
             charOne,
             charTwo,
             aiOne,
-            aiTwo
+            aiTwo,
+            aiAccuracyOne,
+            aiAccuracyTwo
         };
     }
     //function that when executed will render the game board and set all parameters to the game controller
