@@ -32,13 +32,25 @@ const titleScreen=(function title(){
         }
     };
 
-    const aiPrecision=(ai)=>{
+    const aiPrecision=(ai, menu)=>{
         /* 
         **Get the AI difficulty level. If it is false, we pass a null value.
         **If true, a switch statement yields a decimal value based on the string in the dropdown box.
         **This 'precision' value will later be a threshold for determining if the AI will use a random
         **move, or the optimal move using minimax.
         */
+        if(!ai) return null;
+        
+        switch(menu.value){
+            case 'cheez': 
+                return 1.00;
+            case 'hard' : 
+                return 0.75;
+            case 'medium' : 
+                return 0.50;
+            default:
+                return 0.25;
+        }
     };
     
     //Function that gets both player values, and returns them as an object to be passed to game controller
@@ -61,11 +73,13 @@ const titleScreen=(function title(){
         const aiTwo=document.querySelector('#playerTwoAI:checked').value=='false' ? false:true;
 
         // Call to set AI accuracy
-        const aiAccuracyOne=aiPrecision(aiOne);
-        const aiAccuracyTwo=aiPrecision(aiTwo);
+        const menuOne=document.querySelector('#difficultyOne');
+        const menuTwo=document.querySelector('#difficultyTwo')
+        const aiAccuracyOne=aiPrecision(aiOne, menuOne);
+        const aiAccuracyTwo=aiPrecision(aiTwo, menuTwo);
         
-
-        
+        console.log(aiAccuracyOne)
+        console.log(aiAccuracyTwo)
 
         return {
             oneName, 
