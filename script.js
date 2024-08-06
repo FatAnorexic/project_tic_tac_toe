@@ -171,6 +171,12 @@ function indexValue(){
 
 function AI(maximizer, minimizer){
 
+    // Function to determine if the next move will be random or the best possible 
+    // move it can make.
+    const determineMove=(board, precision)=>{
+        
+    }
+
     const emptyCells=(board)=>{
         return board.filter(empty=>empty.getVal()==='');
     };
@@ -277,7 +283,7 @@ function GameController(playerOne, playerTwo, pOneChar, pTwoChar, aiOne, aiTwo, 
 
     //Creates an array of player objects containing both their name and their Character
     const contenders=[{name:playerOne, char: pOneChar, score: 0, AI: aiOne, precision: difficultyOne}, 
-                      {name:playerTwo, char: pTwoChar, score: 0, AI: aiTwo, precision:difficultyTwo}
+                      {name:playerTwo, char: pTwoChar, score: 0, AI: aiTwo, precision: difficultyTwo}
                      ];
     //Initialize a variable called round and set it to 1
     let round=1;
