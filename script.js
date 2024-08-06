@@ -93,7 +93,12 @@ const titleScreen=(function title(){
     const startGame=()=>{
         const play=getPlayerValues();
         setPlayerAvatar();
-        const game=GameController(play.oneName, play.twoName, play.charOne, play.charTwo, play.aiOne, play.aiTwo);
+        // Pass play values to game controller
+        const game=GameController(
+            play.oneName, play.twoName, play.charOne, play.charTwo, play.aiOne,
+            play.aiTwo, play.aiAccuracyOne, play.aiAccuracyTwo
+        );
+
         displayTitle.style.display='none';
         displayGame.style.display='flex';
         displayController(game);
@@ -268,14 +273,16 @@ function AI(maximizer, minimizer){
 **to the game. Players will also be able to input their name and will be assigned strings.
 */
 
-function GameController(playerOne, playerTwo, pOneChar, pTwoChar, aiOne, aiTwo){
+function GameController(playerOne, playerTwo, pOneChar, pTwoChar, aiOne, aiTwo, difficultyOne, difficultyTwo){
 
     //Creates an array of player objects containing both their name and their Character
-    const contenders=[{name:playerOne, char: pOneChar, score: 0, AI: aiOne}, {name:playerTwo, char: pTwoChar, score: 0, AI: aiTwo}];
+    const contenders=[{name:playerOne, char: pOneChar, score: 0, AI: aiOne, precision: difficultyOne}, 
+                      {name:playerTwo, char: pTwoChar, score: 0, AI: aiTwo, precision:difficultyTwo}
+                     ];
     //Initialize a variable called round and set it to 1
     let round=1;
     let continueGame=true;
-
+    console.log(contenders[0].precision, contenders[1].precision)
     const getContinue=()=>continueGame;
     //allows manipulation of the continue state, while keeping it private
     const setContinue=(flag)=>{
