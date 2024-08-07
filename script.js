@@ -174,8 +174,18 @@ function AI(maximizer, minimizer){
     // Function to determine if the next move will be random or the best possible 
     // move it can make.
     const determineMove=(board, precision)=>{
-        
-    }
+        let value =(Math.random()*101)/100
+        let choice;
+        if(value<=precision){
+            choice=findBestMove(board, maximizer);
+            return choice;
+        }else{
+            do{
+                choice=Math.floor(Math.random()*9);
+            }while(board[choice].getVal()!='');
+            return choice;
+        }
+    };
 
     const emptyCells=(board)=>{
         return board.filter(empty=>empty.getVal()==='');
@@ -266,7 +276,7 @@ function AI(maximizer, minimizer){
 
 
 
-    return{findBestMove};
+    return{determineMove};
 }
 
 
@@ -446,7 +456,7 @@ function GameController(playerOne, playerTwo, pOneChar, pTwoChar, aiOne, aiTwo, 
         let maximizer=getCurrent().char;
         // Find the current minimizer for minimax function
         let minimizer = getCurrent().char==contenders[1].char ? contenders[0].char:contenders[1].char;
-        let choice=AI(maximizer, minimizer).findBestMove(board.getBoard(), maximizer);
+        let choice=AI(maximizer, minimizer).determineMove(board.getBoard(), getCurrent().precision);
         board.markIdx(choice, getCurrent().char);
 
         check();
