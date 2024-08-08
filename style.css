@@ -22,6 +22,9 @@ body{
     background-color: #4c79a1;
 }
 /* Main conatiner design */
+.main{
+    padding-top: 2rem;
+}
 /* Title screen design */
 .titleScreen{
     gap: 2rem;
