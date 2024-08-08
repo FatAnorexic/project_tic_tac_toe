@@ -279,9 +279,6 @@ function AI(maximizer, minimizer){
     return{determineMove};
 }
 
-
-
-
 /*
 **Handles the game itself and uses the previously defined functions to place Characters on the board.
 **Checks for win conditions and tie breakers. Players are stored in objects and assigned a char upon
