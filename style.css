@@ -34,7 +34,14 @@ body{
     justify-content: center;
     align-items: center;
 }
-
+.startGame {
+    border: none;
+    box-shadow: 0px 0px 7px 5px rgba(0,0,0,0.5);
+    border-radius: 1rem;
+    /* box-sizing: border-box; */
+    width: 10rem;
+    height: 2rem;
+}
 .image{
     width: 10rem;
 }
