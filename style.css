@@ -42,13 +42,18 @@ body{
 .nameContainer input[type=text]:focus {
     background-color: white;
 }
-
 .nameContainer input[type=text]{
     border-radius: 1rem;
     padding: 5px;
     background-color: rgba(49, 4, 92, 0.719);
     text-align: center;
     box-shadow: inset 0 1px 3px rgba(0,0,0,0.3), 0 2px rgba(255,255,255,0.1);
+}
+
+/* Makes interactable items on the title screen change to a pointer. 
+** Indicating the object can be interacted with */
+.nameContainer input:hover, .radioButton:hover, .startGame:hover, select:hover{
+    cursor: pointer;
 }
 
 .image{
