@@ -100,7 +100,7 @@ const titleScreen=(function title(){
         );
 
         displayTitle.style.display='none';
-        displayGame.style.display='flex';
+        displayGame.style.display='grid';
         displayController(game);
     }
 

@@ -105,9 +105,11 @@ body{
     height: 2rem;
 }
 /* Game screen design */
-.game{
-    display: flex;
+.game {
+    grid-template-rows: repeat(2,auto);
+    grid-template-columns: repeat(3, auto);
     align-items: center;
+    justify-content: center;
     gap: 3rem;
 }
 .round{
