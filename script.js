@@ -10,8 +10,8 @@ const titleScreen=(function title(){
     const displayTitle=document.getElementById('titleScreen');
     const playerOneImage=document.getElementById('image One');
     const playerTwoImage=document.getElementById('image Two');
-    let isAIOne=document.querySelectorAll('#playerOneAI');
-    let isAITwo=document.querySelectorAll('#playerTwoAI');
+    let isAIOne=document.querySelectorAll('[name="playerOneAI"]');
+    let isAITwo=document.querySelectorAll('[name="playerTwoAI"]');
     
 
     // Factory function that sets the Avatar images for players
@@ -60,8 +60,8 @@ const titleScreen=(function title(){
         const twoName=document.getElementById('player_two_name').value== '' ? "Player Two":document.getElementById('player_two_name').value;
 
         // Selects the characters for player one and player two|if the two values are the same Player one defaultes to the other
-        let charOne=document.querySelector('#playerOneChar:checked').value;
-        let charTwo=document.querySelector('#playerTwoChar:checked').value;
+        let charOne=document.querySelector('[name="playerOneChar"]:checked').value;
+        let charTwo=document.querySelector('[name="playerTwoChar"]:checked').value;
         if(charOne=='X' && charTwo=='X'){
             charOne='O';
         }else if(charOne=='O' && charTwo=='O'){
@@ -69,8 +69,8 @@ const titleScreen=(function title(){
         }
 
         // Get the AI status of both players
-        const aiOne=document.querySelector('#playerOneAI:checked').value=='false' ? false:true;
-        const aiTwo=document.querySelector('#playerTwoAI:checked').value=='false' ? false:true;
+        const aiOne=document.querySelector('[name="playerOneAI"]:checked').value=='false' ? false:true;
+        const aiTwo=document.querySelector('[name="playerTwoAI"]:checked').value=='false' ? false:true;
 
         // Call to set AI accuracy
         const menuOne=document.querySelector('#difficultyOne');
