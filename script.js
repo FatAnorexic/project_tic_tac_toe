@@ -25,9 +25,12 @@ const titleScreen=(function title(){
     // Set the difficulty level to display or not based on Human or AI selection
     const setForm=(event)=>{
         let formChange=event.target.name=='playerOneAI'? document.querySelector('.challengeFormOne'):document.querySelector('.challengeFormTwo');
+        let imageSrc=event.target.name=='playerOneAI'? document.getElementById('image One'):document.getElementById('image Two');
         if(event.target.value=='true'){
+            imageSrc.src='images/AIAbstractTest.png';
             formChange.style.display='block';
         }else{
+            imageSrc.src='images/PlayerAbstractTest.png';
             formChange.style.display='none';
         }
     };
