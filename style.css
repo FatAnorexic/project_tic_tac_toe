@@ -111,9 +111,12 @@ form{
 }
 select {
     outline: none;
-    border: none;
-    border-bottom: 2px solid #747373;
-    border-radius: 0px;
+    border-radius: 2rem;
+    width: 8rem;
+    height: 1.75rem;
+    font-size: medium;
+    font-weight: bold;
+    
 }
 /* Game screen design */
 .game {
