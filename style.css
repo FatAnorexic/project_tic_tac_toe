@@ -118,6 +118,9 @@ select {
     font-weight: bold;
     
 }
+option{
+    font-weight: bold;
+}
 /* Game screen design */
 .game {
     grid-template-rows: repeat(2,auto);
