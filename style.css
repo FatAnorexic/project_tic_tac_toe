@@ -57,6 +57,7 @@ body{
 }
 
 .image{
+    border-radius: 1rem;
     width: 10rem;
 }
 
@@ -129,13 +130,20 @@ option{
     justify-content: center;
     gap: 3rem;
 }
-    
+
 /* Styling for the name, scores, and avatars */
+.playerOne, .playerTwo {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
 .nameOne, .nameTwo, .scoreOne, .scoreTwo {
     text-align: center;
-    font-size: larger;
+    font-size: 2rem;
     font-weight: bold;
     padding: 10px;
+    border-radius: 1rem;
+    border: 1px solid black;
 }
 /* Sets the location of score, end and reset buttons */
 .round{
