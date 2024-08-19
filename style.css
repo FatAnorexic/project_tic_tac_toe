@@ -129,8 +129,15 @@ option{
     justify-content: center;
     gap: 3rem;
 }
+    
+/* Styling for the name, scores, and avatars */
+.nameOne, .nameTwo, .scoreOne, .scoreTwo {
+    text-align: center;
+    font-size: larger;
+    font-weight: bold;
+    padding: 10px;
+}
 /* Sets the location of score, end and reset buttons */
-
 .round{
     grid-area: 2/2;
     display: flex;
