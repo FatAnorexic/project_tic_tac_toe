@@ -420,7 +420,7 @@ function GameController(playerOne, playerTwo, pOneChar, pTwoChar, aiOne, aiTwo, 
             updateBoard();
         }else{
             winRound(getWin(), getTie()).getMessage();
-            endRound();
+            updateBoard();
         }
     };
     
@@ -476,7 +476,8 @@ function GameController(playerOne, playerTwo, pOneChar, pTwoChar, aiOne, aiTwo, 
         resetGame, 
         board,
         getRound, 
-        getBoard: board.getBoard
+        getBoard: board.getBoard,
+        endRound
     };
 }
 
