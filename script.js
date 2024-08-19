@@ -267,7 +267,7 @@ function AI(maximizer, minimizer){
                 board[x].addChar(player);
 
                 let value=minimax(board, 0, minimizer);
-                console.log(value)
+                // console.log(value)
                 board[x].addChar('');
                 if(value>bestVal){
                     bestMove=x;
