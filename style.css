@@ -55,12 +55,6 @@ body{
 .nameContainer input:hover, .radioButton label:hover, .startGame:hover, select:hover{
     cursor: pointer;
 }
-
-.image{
-    border-radius: 1rem;
-    width: 10rem;
-}
-
 /* Radio button styling
 ** This styling comes from JiveDig(see sources MD for more)*/
 
@@ -145,6 +139,11 @@ option{
     border-radius: 1rem;
     border: 1px solid black;
 }
+.image{
+    border-radius: 1rem;
+    width: 10rem;
+}
+
 /* Sets the location of score, end and reset buttons */
 .round {
     grid-area: 2/2;
