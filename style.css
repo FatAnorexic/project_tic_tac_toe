@@ -153,12 +153,14 @@ option{
 }
 
 /* make the board a grid display */
-.board{
+.board {
     display: grid;
-    width: 300px;
-    height: 300px;
+    width: 400px;
+    height: 400px;
     justify-content: center;
+    align-content: center;
     grid-template-columns: repeat(3,100px);
     grid-template-rows: repeat(3,100px);
     box-shadow: 0px 8px 10px rgba(0,0,0,0.7), 0px 5px 10px rgba(255,255,255,0.3);
+    background-color: #b586dc;
 }
