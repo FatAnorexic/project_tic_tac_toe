@@ -179,6 +179,8 @@ option{
 }
 .tempCells:hover{
     cursor: pointer;
+    background-color: #7f5e9b;
+    transition: background-color 0.5s ease-in-out;
 }
 /* make the board a grid display */
 .board {
