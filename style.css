@@ -135,6 +135,14 @@ option{
     padding: 1rem;
 }
 
+.tempCells {
+    border: 2px solid black;
+    background-color: #b586dc;
+    color: white;
+    font-size: xxx-large;
+    font-weight: 700;
+}
+
 /* make the board a grid display */
 .board{
     display: grid;
