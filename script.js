@@ -494,6 +494,9 @@ function displayController(game){
     const scoreOne=document.getElementById('scoreNumOne');
     const scoreTwo=document.getElementById('scoreNumTwo');
 
+    //selects the next round button for handling of next round
+    const nextRound=document.getElementById('nextRound');
+
     //Select the span element that will display the current round on screen
     const round=document.getElementById('roundNum');
 
@@ -566,6 +569,12 @@ function displayController(game){
         game.setContinue(false);
         render();
     });
+
+    // event handler for next round
+    nextRound.addEventListener('click', ()=>{
+        game.endRound();
+        render();
+    })
 
     render();
     
