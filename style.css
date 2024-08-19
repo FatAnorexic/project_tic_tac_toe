@@ -177,7 +177,9 @@ option{
 .tempCells.B{
     border-bottom: none;
 }
-
+.tempCells:hover{
+    cursor: pointer;
+}
 /* make the board a grid display */
 .board {
     display: grid;
