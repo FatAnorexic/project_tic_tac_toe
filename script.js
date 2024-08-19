@@ -299,7 +299,6 @@ function GameController(playerOne, playerTwo, pOneChar, pTwoChar, aiOne, aiTwo, 
     //Initialize a variable called round and set it to 1
     let round=1;
     let continueGame=true;
-    console.log(contenders[0].precision, contenders[1].precision)
     const getContinue=()=>continueGame;
     //allows manipulation of the continue state, while keeping it private
     const setContinue=(flag)=>{
