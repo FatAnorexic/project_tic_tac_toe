@@ -128,7 +128,7 @@ option{
     grid-template-columns: repeat(3, auto);
     align-items: center;
     justify-content: center;
-    gap: 3rem;
+    column-gap: 3rem;
 }
 
 /* Styling for the name, scores, and avatars */
@@ -146,11 +146,13 @@ option{
     border: 1px solid black;
 }
 /* Sets the location of score, end and reset buttons */
-.round{
+.round {
     grid-area: 2/2;
     display: flex;
     justify-content: center;
     padding: 1rem;
+    font-size: 2rem;
+    font-weight: bold;
 }
 .endGame{
     grid-area: 3/1;
