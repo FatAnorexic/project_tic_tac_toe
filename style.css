@@ -136,11 +136,20 @@ option{
 }
 
 .tempCells {
-    border: 2px solid black;
     background-color: #b586dc;
     color: white;
     font-size: xxx-large;
     font-weight: 700;
+    border: none;
+    border-right:2px solid black;
+    border-bottom: 2px solid black;
+    outline: none;
+}
+.tempCells.R{
+    border-right:none;
+}
+.tempCells.B{
+    border-bottom: none;
 }
 
 /* make the board a grid display */
@@ -152,9 +161,4 @@ option{
     grid-template-columns: repeat(3,100px);
     grid-template-rows: repeat(3,100px);
     
-}
-
-.tempCells{
-    border: 2px solid black;
-    background-color: #b586dc;
 }
