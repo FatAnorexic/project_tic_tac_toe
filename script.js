@@ -306,7 +306,7 @@ function GameController(playerOne, playerTwo, pOneChar, pTwoChar, aiOne, aiTwo, 
     }
 
     const setRound=()=>{
-        if(round<5) round++;
+        if(round<6) round++;
         else round=1;
     }
     const getRound=()=>{
@@ -314,7 +314,7 @@ function GameController(playerOne, playerTwo, pOneChar, pTwoChar, aiOne, aiTwo, 
     }
     //Ends the current round and moves onto the next
     const endRound=()=>{
-        if(getRound().round<5){
+        if(getRound().round<6){
             setRound();
             getScore();
             board.clearBoard();
