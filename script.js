@@ -422,6 +422,7 @@ function GameController(playerOne, playerTwo, pOneChar, pTwoChar, aiOne, aiTwo, 
             winRound(getWin(), getTie()).getMessage();
             updateBoard();
         }
+        return {getWin, getTie}
     };
     
     const winRound=(win, tie)=>{
@@ -477,7 +478,9 @@ function GameController(playerOne, playerTwo, pOneChar, pTwoChar, aiOne, aiTwo, 
         board,
         getRound, 
         getBoard: board.getBoard,
-        endRound
+        endRound,
+        endGame,
+        check
     };
 }
 
@@ -540,7 +543,7 @@ function displayController(game){
             cellButton.textContent=cell.getVal();
             boardDiv.appendChild(cellButton);
         })
-        if(game.getCurrent().AI){
+        if(game.getCurrent().AI && !game.check().getWin() && !game.check().getTie()){
             (async()=>{
                 await delay(500);
                 game.aiPlayer();
