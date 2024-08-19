@@ -526,6 +526,12 @@ function displayController(game){
         board.forEach((cell, index)=>{
             const cellButton=document.createElement("button");
             cellButton.classList.add('tempCells');
+            if(index==2 || index==5 || index==8){
+                cellButton.classList.add('R');
+            }
+            if(index==6 || index==7 || index==8){
+                cellButton.classList.add('B');
+            }
 
             cellButton.dataset.column=index;
             cellButton.textContent=cell.getVal();
