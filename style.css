@@ -123,18 +123,28 @@ option{
 }
 /* Game screen design */
 .game {
-    grid-template-rows: repeat(2,auto);
+    grid-template-rows: repeat(3,auto);
     grid-template-columns: repeat(3, auto);
     align-items: center;
     justify-content: center;
     gap: 3rem;
 }
+/* Sets the location of score, end and reset buttons */
+
 .round{
+    grid-area: 2/2;
     display: flex;
     justify-content: center;
     padding: 1rem;
 }
+.endGame{
+    grid-area: 3/1;
+}
+.resetGame{
+    grid-area: 3/3;
+}
 
+/* Styling for board buttons */
 .tempCells {
     background-color: #b586dc;
     color: white;
