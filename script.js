@@ -562,8 +562,11 @@ function displayController(game){
 
     function clickHandler(e){
         const index=e.target.dataset.column;
+        //Prevents the action if clicked outside of button
+        if(index==undefined) return;
         //Prevents player from wasting a turn if the cell is already occupied
         if(game.getBoard()[index].getVal()!='') return;
+        
         if(!game.getCurrent().AI) game.player(index);
         render();
     }
