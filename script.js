@@ -138,7 +138,7 @@ function gameBoard(){
         if(board[idx].getVal()!=='') return;
         board[idx].addChar(char);
     };
-    
+
     //Function to clear the board and return everything back to a zeroth state
     const clearBoard=()=>{
         for(let x=0;x<board.length;x++){
@@ -298,9 +298,20 @@ function GameController(playerOne, playerTwo, pOneChar, pTwoChar, aiOne, aiTwo, 
                      ];
     //Initialize a variable called round and set it to 1
     let round=1;
+    
+    // variable to pause the AI in the display function from rendering endlessly. 
+    //It is independent of the Check function, though the check function does ammend it.
+    //This prevents the need to call check to halt the recursive render in ai display,
+    //Which itself adds to the score, more than once. 
+    let playGame=true;
+    const setGame=(flag)=>{
+        playGame=flag;
+    }
+    const getGame=()=>playGame;
+    
+    //allows manipulation of the continue state, while keeping it private
     let continueGame=true;
     const getContinue=()=>continueGame;
-    //allows manipulation of the continue state, while keeping it private
     const setContinue=(flag)=>{
         continueGame=flag;
     }
@@ -315,9 +326,9 @@ function GameController(playerOne, playerTwo, pOneChar, pTwoChar, aiOne, aiTwo, 
     //Ends the current round and moves onto the next
     const endRound=()=>{
         if(getRound().round<6){
+            board.clearBoard();
             setRound();
             getScore();
-            board.clearBoard();
             turn();
             updateBoard();
         }else{
@@ -418,28 +429,21 @@ function GameController(playerOne, playerTwo, pOneChar, pTwoChar, aiOne, aiTwo, 
         if(!getWin() && !getTie()){
             turn();
             updateBoard();
-        }else{
-            winRound(getWin(), getTie()).getMessage();
-            updateBoard();
-        }
+        }else if(getWin() || getTie()){
+            if(getWin()){
+                getCurrent().score++;
+                setGame(false);
+                updateBoard();
+            }else if(getTie()){
+                setGame(false);
+                updateBoard();
+            }
+        } 
         return {getWin, getTie}
     };
     
-    const winRound=(win, tie)=>{
-        let message;
-        
-        if(win){
-            message=`${getCurrent().name} has won the round!`;
-            getCurrent().score++;
-        }else if(tie){
-            message=`Nobody won this round, as there are no moves left on the board`;
-        }
-
-
-        const getMessage=()=>{console.log(message);};
-
-        return {getMessage};
-    };
+    
+    
     
     
     /*
@@ -480,7 +484,8 @@ function GameController(playerOne, playerTwo, pOneChar, pTwoChar, aiOne, aiTwo, 
         getBoard: board.getBoard,
         endRound,
         endGame,
-        check
+        setGame,
+        getGame
     };
 }
 
@@ -512,7 +517,7 @@ function displayController(game){
 
     //This is to delay the AI from executing too fast, and gives the illusion that the computer is thinking
     const delay=(ms)=>new Promise(res=>setTimeout(res, ms));
-
+    
     //FF that updates all statistics like score, names and round number
     const stats=()=>{
         playerOne.textContent=game.getPlayers()[0].name;
@@ -543,7 +548,7 @@ function displayController(game){
             cellButton.textContent=cell.getVal();
             boardDiv.appendChild(cellButton);
         })
-        if(game.getCurrent().AI && !game.check().getWin() && !game.check().getTie()){
+        if(game.getCurrent().AI && game.getGame()){
             (async()=>{
                 await delay(500);
                 game.aiPlayer();
@@ -576,6 +581,7 @@ function displayController(game){
     // event handler for next round
     nextRound.addEventListener('click', ()=>{
         game.endRound();
+        game.setGame(true);
         render();
     })
 
