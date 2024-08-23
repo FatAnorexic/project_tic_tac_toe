@@ -576,6 +576,7 @@ function displayController(game){
     reset.addEventListener('click', ()=>{
         game.resetGame();
         render();
+        nextRound.style.display='none';
     });
 
     end.addEventListener('click', ()=>{
