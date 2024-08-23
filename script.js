@@ -369,6 +369,7 @@ function GameController(playerOne, playerTwo, pOneChar, pTwoChar, aiOne, aiTwo, 
         board.clearBoard();
         currentPlayer=contenders[0];
         updateBoard();
+        setGame(true);
     }
 
     //Creates an instance of the game board
