@@ -29,6 +29,7 @@ body{
 /* Main conatiner design */
 .main{
     padding-top: 2rem;
+    padding-bottom: 3rem;
 }
 /* Title screen design */
 .titleScreen{
@@ -165,14 +166,18 @@ option{
     padding: 0.5rem 1rem;
     box-shadow: 0px 10px 10px rgba(0,0,0,0.5);
 }
-.endGame{
+.endGame {
     grid-area: 3/1;
+    background-color: #ab0000f2;
+    color: white;
 }
 .nextRound{
     grid-area: 3/2;
 }
-.resetGame{
+.resetGame {
     grid-area: 3/3;
+    background-color: #4c79a1;
+    color: white;
 }
 
 /* Styling for board buttons */
