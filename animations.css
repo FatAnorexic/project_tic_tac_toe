@@ -1,5 +1,12 @@
 
 .startGame:hover, .resetGame:hover, .endGame:hover, .nextRound:hover{
     transform: scale(1.05);
-    transition: transform 0.2s ease;
+    transition: 0.2s ease-out;
+}
+
+/* Makes interactable items on the title screen change to a pointer. 
+** Indicating the object can be interacted with */
+.nameContainer input:hover, .radioButton label:hover, .startGame:hover, select:hover,
+button:hover{
+    cursor: pointer;
 }
