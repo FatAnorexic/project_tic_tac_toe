@@ -1,11 +1,17 @@
-
-
+@import url('https://fonts.googleapis.com/css2?family=Matemasie&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nerko+One&display=swap');
 
 /* Global variables for color and styling */
 
 :root{
     --primary-color: #4c79a1;
     --default-text-color: rgba(255, 255, 255, 0.89);
+    --font: "Nerko One";
+}
+
+*{
+    font-family: var(--font, sans-serif);
+    font-size: 1.2rem;
 }
 
 /* Set general settings for entire page */
@@ -39,6 +45,7 @@ body{
     box-shadow: 0px 7px 8px rgba(0,0,0,0.5);
 }
 .titleHeader{
+    font-family: 'Matemasie', sans-serif;
     font-size: xxx-large;
 }
 
@@ -92,7 +99,6 @@ button:hover{
 .radioButton label{
     background-color: #e4e4e4;
     color:rgba(0,0,0,0.5);
-    font-size: 16px;
     text-align: center;
     padding:8px 16px;
     margin-right: -1px;
@@ -129,7 +135,6 @@ select {
     border-radius: 2rem;
     width: 8rem;
     height: 1.75rem;
-    font-size: medium;
     font-weight: bold;
     
 }
@@ -192,7 +197,7 @@ option{
 
 /* Styling for board buttons */
 .tempCells {
-    font-size: xxx-large;
+    font-size: 3rem;
     font-weight: 700;
     border: none;
     border-right:2px solid black;
@@ -220,4 +225,8 @@ option{
     grid-template-rows: repeat(3,100px);
     box-shadow: 0px 8px 10px rgba(0,0,0,0.7), 0px 5px 10px rgba(255,255,255,0.3);
     border-radius: 1rem;
+}
+
+span{
+    font-size: 2rem;
 }
