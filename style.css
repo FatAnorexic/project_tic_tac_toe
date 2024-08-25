@@ -1,6 +1,12 @@
 
 
 
+/* Global variables for color and styling */
+
+:root{
+    --primary-color: #4c79a1;
+}
+
 /*  */
 body{
     /*display: flex;
@@ -18,7 +24,7 @@ body{
     align-items: center;
     width: 100%;
     padding-bottom: 1rem;
-    background-color: #4c79a1;
+    background-color: var(--primary-color, rgba(43, 130, 212, 0.89));
     box-shadow: 0px 7px 8px rgba(0,0,0,0.5);
 }
 .titleHeader{
@@ -49,7 +55,7 @@ body{
 .nameContainer input[type=text]{
     border-radius: 1rem;
     padding: 5px;
-    background-color: #4c79a1;
+    background-color: var(--primary-color);
     text-align: center;
     box-shadow: inset 0 1px 3px rgba(0,0,0,0.3), 0 2px rgba(255,255,255,0.1);
     color: rgba(255, 255, 255, 0.92);
@@ -86,7 +92,7 @@ button:hover{
 }
 
 .radioButton input:checked + label {
-    background-color: #4c79a1;
+    background-color: var(--primary-color);
     box-shadow: none;
     color: #ffffffe8;
 }
@@ -176,7 +182,7 @@ option{
 }
 .resetGame {
     grid-area: 3/3;
-    background-color: #4c79a1;
+    background-color: var(--primary-color);
     color: white;
 }
 
@@ -211,6 +217,6 @@ option{
     grid-template-columns: repeat(3,100px);
     grid-template-rows: repeat(3,100px);
     box-shadow: 0px 8px 10px rgba(0,0,0,0.7), 0px 5px 10px rgba(255,255,255,0.3);
-    background-color: #4c79a1;
+    background-color: var(--primary-color);
     border-radius: 1rem;
 }
