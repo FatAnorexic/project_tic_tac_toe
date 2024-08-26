@@ -28,5 +28,5 @@ form[style*="block"]{
 }
 
 form[class*="fadeOut"]{
-    animation: fadeOut 0.7s;
+    animation: fadeOut 0.8s;
 }
