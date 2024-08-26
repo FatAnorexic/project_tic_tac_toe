@@ -30,3 +30,22 @@ form[style*="block"]{
 form[class*="fadeOut"]{
     animation: fadeOut 0.3s;
 }
+
+
+/* X's and O's placement animations */
+@keyframes charIn {
+    0%{
+        transform: scale(2);
+        filter: blur(4px);
+        opacity: 0;
+    }
+    100%{
+        transform: scale(1);
+        filter: blur(0px);
+        opacity: 1;
+    }
+    
+}
+
+
+

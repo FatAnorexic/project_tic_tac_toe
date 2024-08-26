@@ -554,7 +554,7 @@ function displayController(game){
             }
 
             cellButton.dataset.column=index;
-            cellButton.textContent=cell.getVal();
+            cellButton.textContent=cell.getVal()
             boardDiv.appendChild(cellButton);
         })
         if(game.getCurrent().AI && game.getGame()){
@@ -574,6 +574,8 @@ function displayController(game){
         if(index==undefined) return;
         //Prevents player from wasting a turn if the cell is already occupied
         if(game.getBoard()[index].getVal()!='') return;
+
+        if(!game.getGame()) return;
         
         if(!game.getCurrent().AI) game.player(index);
         render();
