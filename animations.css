@@ -10,3 +10,23 @@
 button:hover{
     cursor: pointer;
 }
+
+/* When AI is selected in title screen, fade in the the form options */
+
+@keyframes fadeIn{
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+@keyframes fadeOut{
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+form[style*="block"]{
+    animation: fadeIn 0.7s;
+}
+
+form[class*="fadeOut"]{
+    animation: fadeOut 0.7s;
+}
