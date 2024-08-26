@@ -35,12 +35,11 @@ const titleScreen=(function title(){
             formChange.classList.add('fadeOut');
             // Function exists solely to let the fade out animation to play
             async function fadeOut() {
-                await new Promise(resolve=>setTimeout(resolve, 700));
+                await new Promise(resolve=>setTimeout(resolve, 200));
                 formChange.style.display='none';
                 formChange.classList.remove('fadeOut');
             }
             fadeOut();
-            
         }
     };
 

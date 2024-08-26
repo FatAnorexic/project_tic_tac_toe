@@ -24,9 +24,9 @@ button:hover{
 }
 
 form[style*="block"]{
-    animation: fadeIn 0.7s;
+    animation: fadeIn 0.5s;
 }
 
 form[class*="fadeOut"]{
-    animation: fadeOut 0.8s;
+    animation: fadeOut 0.3s;
 }
