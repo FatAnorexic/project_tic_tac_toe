@@ -473,8 +473,8 @@ function GameController(playerOne, playerTwo, pOneChar, pTwoChar, aiOne, aiTwo, 
         board.markIdx(choice, getCurrent().char);
 
         check();
+        return choice;
     }
-
 
     //initialize the board upon loading
     updateBoard();
@@ -536,15 +536,23 @@ function displayController(game){
     }
 
     //This renders the board when the game is loaded into memory
-    const render=()=>{
+    const render=(target)=>{
         //if we end the game, we return to the title screen
         if(!game.getContinue()) location.reload();
         if(!game.getGame()) nextRound.style.display='block';
         stats();
+
         const board=game.getBoard();
         boardDiv.textContent='';
         board.forEach((cell, index)=>{
             const cellButton=document.createElement("button");
+
+            
+            let word=document.createElement('span')
+            word.classList.add('chars')
+            word.textContent=cell.getVal();
+            cellButton.appendChild(word);
+            
             cellButton.classList.add('tempCells');
             if(index==2 || index==5 || index==8){
                 cellButton.classList.add('R');
@@ -554,14 +562,20 @@ function displayController(game){
             }
 
             cellButton.dataset.column=index;
-            cellButton.textContent=cell.getVal()
+            //Sets the animation for the clicked cell
+            if(target!=undefined && cellButton.dataset.column==target){
+                word.classList.add('animate');
+            }
+            
             boardDiv.appendChild(cellButton);
         })
+
         if(game.getCurrent().AI && game.getGame()){
             (async()=>{
                 await delay(500);
-                game.aiPlayer();
-                render();
+                let choice=game.aiPlayer();
+                let target=document.querySelector('.tempCells').dataset.column=choice;
+                render(target);
             })();
             
         }
@@ -574,12 +588,11 @@ function displayController(game){
         if(index==undefined) return;
         //Prevents player from wasting a turn if the cell is already occupied
         if(game.getBoard()[index].getVal()!='') return;
-
         if(!game.getGame()) return;
-        
         if(!game.getCurrent().AI) game.player(index);
-        render();
+        render(index);
     }
+    
     boardDiv.addEventListener('click', clickHandler);
 
     //two event handlers that change the state of the game, and then calls render

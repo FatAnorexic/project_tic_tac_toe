@@ -47,5 +47,7 @@ form[class*="fadeOut"]{
     
 }
 
-
+.animate{
+    animation: charIn 0.3s;
+}
 
