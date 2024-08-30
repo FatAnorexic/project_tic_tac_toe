@@ -190,8 +190,6 @@ option{
 
 /* Styling for board buttons */
 .tempCells {
-    font-size: 3rem;
-    font-weight: 700;
     border: none;
     border-right:2px solid black;
     border-bottom: 2px solid black;
@@ -207,6 +205,11 @@ option{
     background-color: #335675;
     transition: background-color 0.5s ease-in-out;
 }
+.chars{
+    font-size: 3rem;
+    font-weight: 700;
+}
+
 /* make the board a grid display */
 .board {
     display: grid;
