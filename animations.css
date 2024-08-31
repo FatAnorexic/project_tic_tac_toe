@@ -64,7 +64,7 @@ form[class*="fadeOut"]{
 }
 
 
-/* Eases the next round button into view */
+/* Eases the next round button into view/out of view*/
 .nextRound{
     animation: fadeIn 3.0s ease-in;
 }
