@@ -533,6 +533,24 @@ function displayController(game){
         scoreOne.textContent=game.getPlayers()[0].score;
         scoreTwo.textContent=game.getPlayers()[1].score;
         round.textContent=game.getRound().round;
+        //Sets the class for whose turn it currently is
+        if(game.getCurrent()==game.getPlayers()[0]){
+            playerOne.classList.add('turn');
+            document.querySelector('.scoreOne').classList.add('turn');
+
+            if(playerTwo.classList.contains('turn')){
+                playerTwo.classList.remove('turn');
+                document.querySelector('.scoreTwo').classList.remove('turn');
+            }
+        }else if(game.getCurrent()==game.getPlayers()[1]){
+            playerTwo.classList.add('turn');
+            document.querySelector('.scoreTwo').classList.add('turn');
+            
+            if(playerOne.classList.contains('turn')){
+                playerOne.classList.remove('turn');
+                document.querySelector('.scoreOne').classList.remove('turn');
+            }
+        }
     }
 
     //This renders the board when the game is loaded into memory
@@ -572,7 +590,7 @@ function displayController(game){
 
         if(game.getCurrent().AI && game.getGame()){
             (async()=>{
-                await delay(500);
+                await delay(1000);
                 let choice=game.aiPlayer();
                 let target=document.querySelector('.tempCells').dataset.column=choice;
                 render(target);
