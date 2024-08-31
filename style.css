@@ -206,6 +206,7 @@ option{
     transition: background-color 0.5s ease-in-out;
 }
 .chars{
+    position: relative;
     font-size: 3rem;
     font-weight: 700;
 }
