@@ -629,8 +629,13 @@ function displayController(game){
     nextRound.addEventListener('click', ()=>{
         game.endRound();
         game.setGame(true);
-        render();
-        nextRound.style.display='none';
+        (async()=>{
+            nextRound.classList.add('fadeAway');
+            await delay(700);
+            nextRound.style.display='none';
+            nextRound.classList.remove('fadeAway');
+            render();
+        })();
     })
 
     render();
