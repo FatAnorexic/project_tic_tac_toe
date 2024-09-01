@@ -441,6 +441,8 @@ function GameController(playerOne, playerTwo, pOneChar, pTwoChar, aiOne, aiTwo, 
             if(getWin()){
                 getCurrent().score++;
                 setGame(false);
+                document.querySelector('.winName').textContent=getCurrent().name;
+                document.querySelector('.winMessage').style.display='block';
                 updateBoard();
             }else if(getTie()){
                 setGame(false);
