@@ -143,8 +143,13 @@ option{
     column-gap: 3rem;
 }
 .win{
+    display: inline-block;
     grid-area: 1/2;
+    margin:2rem;
     text-align: center;
+}
+.winMessage, .tieMessage{
+    margin:-1.3rem;
 }
 /* Styling for the name, scores, and avatars */
 .playerOne, .playerTwo {

@@ -557,7 +557,10 @@ function displayController(game){
     const render=(target)=>{
         //if we end the game, we return to the title screen
         if(!game.getContinue()) location.reload();
-        if(!game.getGame()) nextRound.style.display='block';
+        if(!game.getGame()) {
+            nextRound.style.display='block'
+            
+        };
         stats();
 
         const board=game.getBoard();
