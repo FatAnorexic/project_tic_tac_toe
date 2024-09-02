@@ -344,6 +344,7 @@ function GameController(playerOne, playerTwo, pOneChar, pTwoChar, aiOne, aiTwo, 
     }
 
     //Function that exectutes at the end of Every game->uses the resetGame function to bring everything back to start
+    //If the end game button is clicked, display controller will reload the page.
     const endGame=()=>{
         const one=getPlayers()[0].score;
         const two=getPlayers()[1].score;
@@ -358,14 +359,7 @@ function GameController(playerOne, playerTwo, pOneChar, pTwoChar, aiOne, aiTwo, 
             console.log(`${getPlayers()[0].name} score: ${one}`);
             console.log(`${getPlayers()[1].name} score: ${two}`);
         }
-
-        
-        if(choice===1){
-            resetGame();
-        }else{
-            continueGame=false;
-        }
-    }
+    };
 
     //Reset game is a function to reset the contents of the game back to default values->can be triggered at anytime
     const resetGame=()=>{
@@ -377,7 +371,7 @@ function GameController(playerOne, playerTwo, pOneChar, pTwoChar, aiOne, aiTwo, 
         currentPlayer=contenders[0];
         updateBoard();
         setGame(true);
-    }
+    };
 
     //Creates an instance of the game board
     const board=gameBoard();
