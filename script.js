@@ -359,7 +359,7 @@ function GameController(playerOne, playerTwo, pOneChar, pTwoChar, aiOne, aiTwo, 
             console.log(`${getPlayers()[1].name} score: ${two}`);
         }
 
-        let choice=parseInt(prompt(`Would you like to play another round? 1 for yes 0 for no.`));
+        
         if(choice===1){
             resetGame();
         }else{
@@ -582,9 +582,9 @@ function displayController(game){
     const render=(target)=>{
         //if we end the game, we return to the title screen
         if(!game.getContinue()) location.reload();
-        if(!game.getGame()) {
+        if(!game.getGame() && game.getRound().round<6) {
             nextRound.style.display='block'
-            
+
         };
         stats();
 
