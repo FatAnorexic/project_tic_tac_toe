@@ -468,6 +468,31 @@ function GameController(playerOne, playerTwo, pOneChar, pTwoChar, aiOne, aiTwo, 
 
         return {getTieMessage, hideTieMessage};
     };
+
+    const winGameMessage=(winner)=>{
+        const getWinner=()=>{
+            document.querySelector('.winPlayer').textContent=winner.name;
+            document.querySelector('.winGame').style.display='block';
+            document.querySelector('.winScore').textContent=winner.score;
+        }
+        const hideWinner=()=>{
+            document.querySelector('.winPlayer').textContent='';
+            document.querySelector('.winScore').textContent='';
+            document.querySelector('.winGame').style.display='none';
+        }
+
+        return {getWinner, hideWinner};
+    };
+
+    const tieGameMessage=()=>{
+        const getTieGame=()=>{
+            document.querySelector('.tieGame').style.display='block';
+        };
+        const hideTieGame=()=>{
+            document.querySelector('.tieGame').style.display='none';
+        }
+        return {getTieGame, hideTieGame};
+    };
     
     
     
@@ -512,7 +537,9 @@ function GameController(playerOne, playerTwo, pOneChar, pTwoChar, aiOne, aiTwo, 
         setGame,
         getGame,
         winMessage,
-        tieMessage
+        tieMessage,
+        winGameMessage,
+        tieGameMessage
     };
 }
 
