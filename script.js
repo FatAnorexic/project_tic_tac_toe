@@ -441,18 +441,39 @@ function GameController(playerOne, playerTwo, pOneChar, pTwoChar, aiOne, aiTwo, 
             if(getWin()){
                 getCurrent().score++;
                 setGame(false);
-                document.querySelector('.winName').textContent=getCurrent().name;
-                document.querySelector('.winMessage').style.display='block';
+                winMessage().getWinMessage();
                 updateBoard();
             }else if(getTie()){
                 setGame(false);
+                tieMessage().getTieMessage();
                 updateBoard();
             }
         } 
         return {getWin, getTie}
     };
     
-    
+    const winMessage=()=>{
+        getWinMessage=()=>{
+            document.querySelector('.winName').textContent=getCurrent().name;
+            document.querySelector('.winMessage').style.display='block';
+        }
+        hideWinMessage=()=>{
+            document.querySelector('.winName').textContent='';
+            document.querySelector('.winMessage').style.display='none';
+        }
+        return {getWinMessage, hideWinMessage};
+    };
+
+    const tieMessage=()=>{
+        getTieMessage=()=>{
+            document.querySelector('.tieMessage').style.display='block';
+        }
+        hideTieMessage=()=>{
+            document.querySelector('.tieMessage').style.display='none';
+        }
+
+        return {getTieMessage, hideTieMessage};
+    };
     
     
     
@@ -495,7 +516,9 @@ function GameController(playerOne, playerTwo, pOneChar, pTwoChar, aiOne, aiTwo, 
         endRound,
         endGame,
         setGame,
-        getGame
+        getGame,
+        winMessage,
+        tieMessage
     };
 }
 
@@ -620,6 +643,8 @@ function displayController(game){
 
     //two event handlers that change the state of the game, and then calls render
     reset.addEventListener('click', ()=>{
+        game.winMessage().hideWinMessage();
+        game.tieMessage().hideTieMessage();
         game.resetGame();
         render();
         nextRound.style.display='none';
@@ -637,6 +662,8 @@ function displayController(game){
         (async()=>{
             nextRound.classList.add('fadeAway');
             await delay(700);
+            game.winMessage().hideWinMessage();
+            game.tieMessage().hideTieMessage();
             nextRound.style.display='none';
             nextRound.classList.remove('fadeAway');
             render();
