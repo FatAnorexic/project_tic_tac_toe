@@ -349,15 +349,20 @@ function GameController(playerOne, playerTwo, pOneChar, pTwoChar, aiOne, aiTwo, 
         const one=getPlayers()[0].score;
         const two=getPlayers()[1].score;
         
+        winMessage().hideWinMessage();
+        tieMessage().hideTieMessage();
         //Get the winner for the game
         if(one>two){
             console.log(`${getPlayers()[0].name} won the game!`);
+            winGameMessage(getPlayers()[0]).getWinner();
         }else if(two>one){
             console.log(`${getPlayers()[1].name} won the game!`);
+            winGameMessage(getPlayers()[1]).getWinner();
         }else{
             console.log(`Both players tied:`)
             console.log(`${getPlayers()[0].name} score: ${one}`);
             console.log(`${getPlayers()[1].name} score: ${two}`);
+            tieGameMessage().getTieGame();
         }
     };
 
@@ -603,10 +608,7 @@ function displayController(game){
     const render=(target)=>{
         //if we end the game, we return to the title screen
         if(!game.getContinue()) location.reload();
-        if(!game.getGame() && game.getRound().round<6) {
-            nextRound.style.display='block'
-
-        };
+        if(!game.getGame() && game.getRound().round<6) {nextRound.style.display='block'};
         stats();
 
         const board=game.getBoard();
