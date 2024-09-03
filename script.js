@@ -324,7 +324,7 @@ function GameController(playerOne, playerTwo, pOneChar, pTwoChar, aiOne, aiTwo, 
     }
 
     const setRound=()=>{
-        if(round<2) round++;
+        if(round<6) round++;
         else round=1;
     }
     const getRound=()=>{
@@ -609,7 +609,7 @@ function displayController(game){
         //if we end the game, we return to the title screen
         if(!game.getContinue()) location.reload();
         if(!game.getGame() && game.getRound().round<6) {nextRound.style.display='block';}
-        if(!game.getGame() && game.getRound().round>=2){game.endGame();}
+        if(!game.getGame() && game.getRound().round>=6){game.endGame();}
         stats();
 
         const board=game.getBoard();
@@ -669,6 +669,8 @@ function displayController(game){
     reset.addEventListener('click', ()=>{
         game.winMessage().hideWinMessage();
         game.tieMessage().hideTieMessage();
+        game.winGameMessage().hideWinner();
+        game.tieGameMessage().hideTieGame();
         game.resetGame();
         render();
         nextRound.style.display='none';
