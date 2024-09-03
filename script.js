@@ -659,6 +659,7 @@ function displayController(game){
         //Prevents player from wasting a turn if the cell is already occupied
         if(game.getBoard()[index].getVal()!='') return;
         if(!game.getGame()) return;
+        if(game.getCurrent().AI) Event.stop(e);
         if(!game.getCurrent().AI) game.player(index);
         render(index);
     }
