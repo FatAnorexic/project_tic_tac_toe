@@ -687,12 +687,18 @@ function displayController(game){
         game.endRound();
         game.setGame(true);
         (async()=>{
+            document.querySelectorAll('h2').forEach((header)=>{
+                header.classList.add('dissolveOut');
+            })
             nextRound.classList.add('fadeAway');
             await delay(700);
             game.winMessage().hideWinMessage();
             game.tieMessage().hideTieMessage();
             nextRound.style.display='none';
             nextRound.classList.remove('fadeAway');
+            document.querySelectorAll('h2').forEach((header)=>{
+                header.classList.remove('dissolveOut');
+            })
             render();
         })();
     })

@@ -82,7 +82,20 @@ form[class*="fadeOut"]{
         filter: blur(0px)
     }
 }
+@keyframes dissolveOut {
+    0%{
+        opacity: 1;
+        filter: blur(0px);
+    }
+    100%{
+        opacity: 0;
+        filter:blur(20px);
+    }
+}
 
 h2{
     animation: dissolveIn 1.0s ease-in;
+}
+.dissolveOut{
+    animation: dissolveOut 0.8s ease-out ;
 }
