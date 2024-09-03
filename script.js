@@ -324,7 +324,7 @@ function GameController(playerOne, playerTwo, pOneChar, pTwoChar, aiOne, aiTwo, 
     }
 
     const setRound=()=>{
-        if(round<6) round++;
+        if(round<2) round++;
         else round=1;
     }
     const getRound=()=>{
@@ -608,7 +608,8 @@ function displayController(game){
     const render=(target)=>{
         //if we end the game, we return to the title screen
         if(!game.getContinue()) location.reload();
-        if(!game.getGame() && game.getRound().round<6) {nextRound.style.display='block'};
+        if(!game.getGame() && game.getRound().round<6) {nextRound.style.display='block';}
+        if(!game.getGame() && game.getRound().round>=2){game.endGame();}
         stats();
 
         const board=game.getBoard();
