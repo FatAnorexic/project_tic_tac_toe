@@ -71,3 +71,18 @@ form[class*="fadeOut"]{
 .fadeAway{
     animation: fadeOut 0.8s ease-out;
 }
+/* Gets the winning/tie messages to animate in */
+@keyframes dissolveIn {
+    0%{
+        opacity: 0;
+        filter: blur(20px); 
+    }
+    100%{
+        opacity: 1;
+        filter: blur(0px)
+    }
+}
+
+h2{
+    animation: dissolveIn 1.0s ease-in;
+}
