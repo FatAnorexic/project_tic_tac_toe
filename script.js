@@ -477,7 +477,7 @@ function GameController(playerOne, playerTwo, pOneChar, pTwoChar, aiOne, aiTwo, 
     const winGameMessage=(winner)=>{
         const getWinner=()=>{
             document.querySelector('.winPlayer').textContent=winner.name;
-            document.querySelector('.winGame').style.display='block';
+            document.querySelector('.winGame').style.display='flex';
             document.querySelector('.winScore').textContent=winner.score;
         }
         const hideWinner=()=>{

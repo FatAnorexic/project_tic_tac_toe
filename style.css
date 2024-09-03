@@ -142,21 +142,28 @@ option{
     justify-content: center;
     column-gap: 3rem;
 }
-.win{
-    display: inline-flex;
+.win {
+    display: flex;
     grid-area: 1/2;
-    margin:2rem;
+    margin-bottom: 2rem;
+    margin-right: -1.6rem;
     text-align: center;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 }
 .winMessage, .tieMessage, .winGame, .tieGame{
     margin:-1.3rem;
 }
  .winGame{
-    display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    flex: 0 2 95%;
+    flex: 0 2 90%;
+    overflow: hidden;
+}
+.winPlayer, .winScore, .winName{
+    font-size: 1.2rem;
 }
 /* Styling for the name, scores, and avatars */
 .playerOne, .playerTwo {
