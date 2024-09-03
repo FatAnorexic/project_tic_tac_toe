@@ -143,13 +143,20 @@ option{
     column-gap: 3rem;
 }
 .win{
-    display: inline-block;
+    display: inline-flex;
     grid-area: 1/2;
     margin:2rem;
     text-align: center;
 }
-.winMessage, .tieMessage{
+.winMessage, .tieMessage, .winGame, .tieGame{
     margin:-1.3rem;
+}
+ .winGame{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex: 0 2 95%;
 }
 /* Styling for the name, scores, and avatars */
 .playerOne, .playerTwo {
@@ -242,3 +249,4 @@ option{
 span{
     font-size: 2rem;
 }
+
