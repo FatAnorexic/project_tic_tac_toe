@@ -673,8 +673,8 @@ function displayController(game){
         game.winGameMessage().hideWinner();
         game.tieGameMessage().hideTieGame();
         game.resetGame();
-        render();
         nextRound.style.display='none';
+        render();  
     });
 
     end.addEventListener('click', ()=>{
