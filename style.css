@@ -65,6 +65,7 @@ body{
 /* User name styling */
 .nameContainer input[type=text]:placeholder-shown{
     background-color: #e4e4e4;
+    color:rgba(0,0,0,1);
 }
 .nameContainer input[type=text]:focus {
     background-color: white;
